@@ -11,6 +11,11 @@
  *      int readStation()
  *      Reads and returns a new station id
  *
+ *      long long readNumber()
+ *      Reads a floating point number as a long long. 
+ *      The last 4 digits are decimals. 
+ *      Acutally, his value is equal with Xe4, where X is the number read.
+ *
  *      int readPoint(string &point_id, double &distance, double &hz)
  *      Reads new point data. 
  *      If the point is valid, returns 1, else returns EOS.
@@ -20,6 +25,7 @@
 #include<iostream>
 #include<string>
 #include<cstdio>
+#include<cstdlib>
 
 #define EOS 0 //End Of Station
 
@@ -35,9 +41,43 @@ int readStation(){
     return station_id;
 }
 
-int readPoint(string &point_id, double &distance, double &hz){
+long long readNumber(){
 
-    cin>>point_id>>distance>>hz;
+    long long nr=0;
+
+    char a;
+    
+    while(!isdigit(a))
+        scanf("%c", &a);
+
+    while(a!='.'){
+        nr*=10;
+        nr+=atoi(&a);
+        scanf("%c", &a);
+    }
+
+    int decimals=0;
+    scanf("%c", &a);
+
+    while(isdigit(a)){
+        decimals++;
+        nr*=10;
+        nr+=atoi(&a);
+        scanf("%c", &a);
+    }
+
+    while(decimals++<4)
+        nr*=10;
+
+    return nr;
+}
+
+int readPoint(string &point_id, long long &distance, long long &hz){
+
+    cin>>point_id;
+
+    distance=readNumber();
+    hz=readNumber();
 
     if(point_id=="9999" && distance==0 && hz==0)
         return 0;

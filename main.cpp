@@ -11,10 +11,7 @@ int main(int argc, char **argv){
 
     cout<<readStation();
     string point_id;
-    double dist, hz;
-
-    cout<<readPoint(point_id, dist, hz)<<' ';
-    cout<<point_id<<' '<<dist<<' '<<hz<<'\n';
+    long long dist, hz;
 
     return 0;
 
