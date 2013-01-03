@@ -1,0 +1,1 @@
+ g++ -c inout.cpp -o inout.o && g++ -c main.cpp -o main.o && g++ inout.o main.o -o topo && ./topo ex.in
