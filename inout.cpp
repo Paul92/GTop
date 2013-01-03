@@ -25,45 +25,51 @@
 #include<iostream>
 #include<string>
 #include<cstdio>
-#include<cstdlib>
+#include<fstream>
 
 #define EOS 0 //End Of Station
 
 using namespace std;
 
+FILE *f;
+
 void init(string filename){
-    freopen(filename.c_str(), "r", stdin);
+    f=fopen(filename.c_str(), "r");
 }
 
 int readStation(){
     int station_id;
-    cin>>station_id;
+    fscanf(f, "%d", &station_id);
     return station_id;
+}
+
+int atoi(char a){
+    return a-48;
 }
 
 long long readNumber(){
 
     long long nr=0;
 
-    char a;
+    char a=0;
     
     while(!isdigit(a))
-        scanf("%c", &a);
+        fscanf(f, "%c", &a);
 
     while(a!='.'){
         nr*=10;
-        nr+=atoi(&a);
-        scanf("%c", &a);
+        nr+=atoi(a);
+        fscanf(f, "%c", &a);
     }
 
     int decimals=0;
-    scanf("%c", &a);
+    fscanf(f, "%c", &a);
 
     while(isdigit(a)){
         decimals++;
         nr*=10;
-        nr+=atoi(&a);
-        scanf("%c", &a);
+        nr+=atoi(a);
+        fscanf(f, "%c", &a);
     }
 
     while(decimals++<4)
@@ -74,8 +80,10 @@ long long readNumber(){
 
 int readPoint(string &point_id, long long &distance, long long &hz){
 
-    cin>>point_id;
-
+    char point_idC[100];
+    fscanf(f, "%s", point_idC);
+    point_id=point_idC;
+    
     distance=readNumber();
     hz=readNumber();
 
