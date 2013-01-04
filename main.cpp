@@ -1,4 +1,5 @@
 #include "inout.h"
+#include "maths.h"
 #include<iostream>
 #include<cstdlib>
 #include<cstring>

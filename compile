@@ -1,1 +1,6 @@
- g++ -c inout.cpp -o inout.o && g++ -c main.cpp -o main.o && g++ inout.o main.o -o topo && echo Execution starts && ./topo ex.in
+g++ -c inout.cpp -o inout.o && 
+g++ -c maths.cpp -o maths.o &&
+g++ -c main.cpp -o main.o &&
+g++ inout.o maths.o main.o -o topo &&
+echo Execution starts &&
+./topo ex.in
