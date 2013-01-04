@@ -51,6 +51,7 @@
 
 #include<cmath>
 #include"maths.h"
+#include<iostream>
 
 #define PI 3.1415926535897932384626433
 #define precision 4
@@ -79,7 +80,7 @@ long long radToDeg(long long x){
     return roundFirstDecimal(180*x/PI);
 }
 
-long long radToGra(long long x){
+long double radToGra(long double x){
     return roundFirstDecimal(200*x/PI);
 }
 
@@ -91,19 +92,21 @@ long long theta(long long stationX, long long stationY,
     long long bot=orientX-stationX;
 
     long double fraction=(long double)top/bot;
-    long long alpha=roundFirstDecimal(atan2(fraction));
-    alpha=radToGra(alpha);
+    long double alpha=atan(fraction);
     alpha*=pow(10, precision);
-
-    long long theta;
+    alpha=radToGra(alpha);
+    if(alpha<0) 
+		alpha*=(-1);
+	
+	long long theta;
     if(top>=0 && bot>=0){
         theta=alpha;
     }else if(top<0 && bot>=0){
-        theta=400-alpha;
-    }else if(top>=0 && top<0){
-        theta=200-alpha;
+        theta=400*pow(10, precision)-alpha;
+    }else if(top>=0 && bot<0){
+        theta=200*pow(10, precision)-alpha;
     }else if(top<0 && bot<0){
-        theta=200+alpha;
+        theta=200*pow(10, precision)+alpha;
     }
 
     return theta;
@@ -112,7 +115,7 @@ long long theta(long long stationX, long long stationY,
 long long omega(long long orientHz, long long pointHz){
     long long diff=orientHz-pointHz;
     if(diff<0)
-        diff+=400;
+        diff+=400*pow(10, precision);
     return diff;
 }
 
