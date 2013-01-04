@@ -27,6 +27,7 @@
 #include<cstring>
 
 #define EOS 0 //End Of Station
+#define precision 4
 
 using namespace std;
 
@@ -73,7 +74,7 @@ long long readNumber(FILE *f){
         fscanf(f, "%c", &a);
     }
 
-    while(decimals++<4)
+    while(decimals++<precision)
         nr*=10;
 
     return nr;
