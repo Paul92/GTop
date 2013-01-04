@@ -31,9 +31,13 @@
 using namespace std;
 
 char* readStation(FILE *f){
+    
     static char station_id[100];
     fscanf(f, "%s", station_id);
-    cout<<"STATION ID: "<<station_id<<'\n';
+   
+    if(!feof(f))
+        cout<<"STATION ID: "<<station_id<<'\n';
+    
     return station_id;
 }
 
