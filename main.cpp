@@ -39,8 +39,14 @@ int main(int argc, char **argv){
             cout<<orient_id<<" este: ";
             orientY=readNumber(stdin);
 
+            long long th=theta(stationX, stationY, orientX, orientY);
+
             while(readPoint(inputFile, point_id, dist, hz)){
-                cout<<point_id<<' '<<dist<<' '<<hz<<'\n';
+                if(strcmp(point_id, "9999")!=0 && dist==0 && hz==0){
+                    long long orien=orientation(th, omega(orientHz, hz));
+                    long long pointX=absoluteX(relativeX(dist, orien));
+                    long long pointY=absoluteY(relativeY(dist, orien));
+                }
             }
         }
     }
