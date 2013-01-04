@@ -15,23 +15,29 @@ int main(int argc, char **argv){
     char point_id[100], station_id[100];
     long long dist, hz;
 
-    long long stationCoordX, stationCoordY;
-    long long orientX, orientY;
-    char orient[100];
+    long long stationX, stationY;
+    long long orientX, orientY, orientHz, orientDist;
+    char orient_id[100];
 
     while(!feof(inputFile)){
         char* station_id=readStation(inputFile);
         if(!feof(inputFile)){
 
             cout<<"Coordonata X a statiei "<<station_id<<" este: ";
-            stationCoordX=readNumber(stdin);
+            stationX=readNumber(stdin);
 
             cout<<"Coordonata Y a statiei "<<station_id<<" este: ";
-            stationCoordY=readNumber(stdin);
+            stationY=readNumber(stdin);
 
-            readPoint(inputFile, orientX, orientY);
+            readPoint(inputFile, orient_id, orientHz, orientDist);
 
+            cout<<"Coordonata X a punctului de orientare ";
+            cout<<orient_id<<" este: ";
+            orientX=readNumber(stdin);
 
+            cout<<"Coordonata Y a punctului de orientare ";
+            cout<<orient_id<<" este: ";
+            orientY=readNumber(stdin);
 
             while(readPoint(inputFile, point_id, dist, hz)){
                 cout<<point_id<<' '<<dist<<' '<<hz<<'\n';
