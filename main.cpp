@@ -16,6 +16,8 @@ int main(int argc, char **argv){
     long long dist, hz;
 
     long long stationCoordX, stationCoordY;
+    long long orientX, orientY;
+    char orient[100];
 
     while(!feof(inputFile)){
         char* station_id=readStation(inputFile);
@@ -26,6 +28,10 @@ int main(int argc, char **argv){
 
             cout<<"Coordonata Y a statiei "<<station_id<<" este: ";
             stationCoordY=readNumber(stdin);
+
+            readPoint(inputFile, orientX, orientY);
+
+
 
             while(readPoint(inputFile, point_id, dist, hz)){
                 cout<<point_id<<' '<<dist<<' '<<hz<<'\n';
