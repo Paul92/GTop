@@ -23,23 +23,17 @@
 
 #include "inout.h"
 #include<iostream>
-#include<string>
 #include<cstdio>
-#include<fstream>
+#include<cstring>
 
 #define EOS 0 //End Of Station
 
 using namespace std;
 
-FILE *f;
-
-void init(string filename){
-    f=fopen(filename.c_str(), "r");
-}
-
-int readStation(){
-    int station_id;
-    fscanf(f, "%d", &station_id);
+char* readStation(FILE *f){
+    static char station_id[100];
+    fscanf(f, "%s", station_id);
+    cout<<"STATION ID: "<<station_id<<'\n';
     return station_id;
 }
 
@@ -47,7 +41,7 @@ int atoi(char a){
     return a-48;
 }
 
-long long readNumber(){
+long long readNumber(FILE *f){
 
     long long nr=0;
 
@@ -78,16 +72,14 @@ long long readNumber(){
     return nr;
 }
 
-int readPoint(string &point_id, long long &distance, long long &hz){
+int readPoint(FILE *f, char point_id[100], long long &distance, long long &hz){
 
-    char point_idC[100];
-    fscanf(f, "%s", point_idC);
-    point_id=point_idC;
-    
-    distance=readNumber();
-    hz=readNumber();
+    fscanf(f, "%s", point_id);
+     
+    distance=readNumber(f);
+    hz=readNumber(f);
 
-    if(point_id=="9999" && distance==0 && hz==0)
+    if(strcmp(point_id, "9999") && distance==0 && hz==0)
         return 0;
     else
         return 1;

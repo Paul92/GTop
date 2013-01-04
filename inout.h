@@ -1,6 +1,6 @@
 #include<string>
+#include<cstdio>
 
-void init(std::string);
-int readStation();
-int readPoint(std::string &, long long &, long long &);
-
+char* readStation(FILE *f);
+int readPoint(FILE *f, char[100], long long &, long long &);
+long long readNumber(FILE *f);
