@@ -78,14 +78,15 @@ long long readNumber(FILE *f){
 int readPoint(FILE *f, char point_id[100], long long &distance, long long &hz){
 
     fscanf(f, "%s", point_id);
-     
+
     distance=readNumber(f);
     hz=readNumber(f);
 
-    if(strcmp(point_id, "9999") && distance==0 && hz==0)
+    if(!strcmp(point_id, "9999") && distance==0 && hz==0){
         return 0;
-    else
+    }else{
         return 1;
+    }
 
 }
 
