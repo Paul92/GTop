@@ -56,4 +56,30 @@ long long theta(long long stationX, long long stationY,
     return theta;
 }
 
+long long omega(long long orientHz, long long pointHz){
+    long long diff=orientHz-pointHz;
+    if(diff<0)
+        diff+=400;
+    return diff;
+}
+
+long long orientation(long long theta, long long omega){
+    return theta-omega;
+}
+
+long long relativeX(long long dist, long long orientation){
+    return dist*cos(orientation/pow(10, precision));
+}
+
+long long relativeY(long long dist, long long orientation){
+    return dist*sin(orientation/pow(10, precision));
+}
+
+long long absoluteX(long long relativeX, long long stationX){
+    return relativeX+stationX;
+}
+
+long long absoluteY(long long relativeY, long long stationY){
+    return relativeY+stationY;
+}
 
