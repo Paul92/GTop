@@ -50,11 +50,14 @@ long long readNumber(FILE *f){
     while(!isdigit(a))
         fscanf(f, "%c", &a);
 
-    while(a!='.'){
+    while(a!='.' && a!=' ' && a!='\t' && a!='\n'){
         nr*=10;
         nr+=atoi(a);
         fscanf(f, "%c", &a);
     }
+
+    if(a==' ' || a=='\t' || a=='\n')
+        return nr;
 
     int decimals=0;
     fscanf(f, "%c", &a);
