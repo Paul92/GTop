@@ -47,7 +47,7 @@ long long theta(long long stationX, long long stationY,
         theta=alpha;
     }else if(top<0 && bot>=0){
         theta=400-alpha;
-    }else if(top=>0 && top<0){
+    }else if(top>=0 && top<0){
         theta=200-alpha;
     }else if(top<0 && bot<0){
         theta=200+alpha;

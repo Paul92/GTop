@@ -44,8 +44,8 @@ int main(int argc, char **argv){
             while(readPoint(inputFile, point_id, dist, hz)){
                 if(strcmp(point_id, "9999")!=0 && dist==0 && hz==0){
                     long long orien=orientation(th, omega(orientHz, hz));
-                    long long pointX=absoluteX(relativeX(dist, orien));
-                    long long pointY=absoluteY(relativeY(dist, orien));
+                    long long pointX=absoluteX(relativeX(dist, orien), stationX);
+                    long long pointY=absoluteY(relativeY(dist, orien), stationY);
                 }
             }
         }
