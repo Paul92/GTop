@@ -1,3 +1,54 @@
+/**
+ *  Provides some mathematical and topological computations
+ *
+ *  Date crated: 05.01.2013
+ *
+ *  Macro constants:
+ *      PI - the number pi, with many decimals
+ *      precision - values are real values times 10^precision
+ *
+ *  Functions:
+ *      long long roundFirstDecimal(long double x)
+ *      Rounds first decimal of x.
+ *
+ *      long long degToRad(long long x)
+ *      Converts x from degrees to radians.
+ *
+ *      long long graToRad(long long x)
+ *      Converts x from grades to radians.
+ *
+ *      long long radToDeg(long long x)
+ *      Converts x from radians to degrees.
+ *
+ *      long long radToGra(long long x)
+ *      Converts x from radians to grades.
+ *
+ *      long long theta(long long stationX, long long stationY,
+ *                      long long orientX,  long long orientY)
+ *      Computes theta angle between station located at coordinates 
+ *  stationX, stationY and orientation point located at coordinates
+ *  orientX, orientY.
+ *
+ *      long long orientation(long long theta, long long omega)
+ *      Computes orientation of a point.
+ *
+ *      long long relativeX(long long dist, long long orientation)
+ *      Computes relative position X of a point, based on distance and
+ *  orientation.
+ *
+ *      long long relativeY(long long dist, long long orientation)
+ *      Computes relative position y of a point, based on distance and
+ *  orientation.
+ *      
+ *      long long absoluteX(long long relativeX, long long stationX)
+ *      Computes absolute position X of a point, based on his relative
+ *  X position and the X position of station.
+ *
+ *      long long absoluteY(long long relativeY, long long stationY)
+ *      Computes absolute position Y of a point, based on his relative
+ *  Y position and the Y position of station.
+ */
+
 #include<cmath>
 #include"maths.h"
 
@@ -39,7 +90,9 @@ long long theta(long long stationX, long long stationY,
     long long top=orientY-stationY;
     long long bot=orientX-stationX;
 
-    long long alpha=roundFirstDecimal(atan2((long double)top, (long double)bot));
+    long double fraction=(long double)top/bot;
+    long long alpha=roundFirstDecimal(atan2(fraction));
+    alpha=radToGra(alpha);
     alpha*=pow(10, precision);
 
     long long theta;
