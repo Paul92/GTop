@@ -1,23 +1,26 @@
 /**
  *  Handles input and output
  *
+ *  Date created: 05.01.2013
+ *
  *  Macro constants:
  *      EOS - End Of Station. Value is 0.
+ *      precision - values are real values times 10^precision
  *
  *  Functions:
- *      void init(string filename)
- *      Opens filename file; stream redirected to cin
+ *      char *readStation(FILE *f)
+ *      Reads a station id from file f and returns a pointer to it.
  *
- *      int readStation()
- *      Reads and returns a new station id
+ *      int atoi(char a)
+ *      Returns integer value of digit expressed by char a.
  *
- *      long long readNumber()
- *      Reads a floating point number as a long long. 
- *      The last 4 digits are decimals. 
+ *      long long readNumber(FILE *f)
+ *      Reads from file f a floating point number as a long long. 
+ *      The last precision digits are decimals. 
  *      Acutally, his value is equal with Xe4, where X is the number read.
  *
- *      int readPoint(string &point_id, double &distance, double &hz)
- *      Reads new point data. 
+ *      int readPoint(FILE *F, string &point_id, double &distance, double &hz)
+ *      Reads new point data from file f. 
  *      If the point is valid, returns 1, else returns EOS.
 **/
 
