@@ -44,8 +44,6 @@ int main(int argc, char **argv){
             cout<<orient_id<<" este: ";
             orientY=readNumber(stdin);
 
-            cout<<"OY"<<orientY<<'\n';
-
             printPoint(outputFile, orient_id, orientX, orientY);
             fprintf(outputFile, "\n");
 
@@ -57,7 +55,6 @@ int main(int argc, char **argv){
                     long long pointX=absoluteX(relativeX(dist, orien), stationX);
                     long long pointY=absoluteY(relativeY(dist, orien), stationY);
                     printPoint(outputFile, point_id, pointX, pointY);
-                    cout<<"A";
                 }
             }
         }
