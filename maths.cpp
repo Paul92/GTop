@@ -120,11 +120,14 @@ long long omega(long long orientHz, long long pointHz){
 }
 
 long long orientation(long long theta, long long omega){
-    return theta-omega;
+	long long orientation=theta-omega;
+	if(orientation<0)
+		orientation+=400*pow(10, precision);
+	return orientation;  
 }
 
-long long relativeX(long long dist, long long orientation){
-    return dist*cos(orientation/pow(10, precision));
+long long relativeX(long long dist, long long orientation){	
+    return dist*cos(graToRad(orientation/pow(10, precision)));
 }
 
 long long relativeY(long long dist, long long orientation){
