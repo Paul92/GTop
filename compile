@@ -3,4 +3,4 @@ g++ -c maths.cpp -o maths.o &&
 g++ -c main.cpp -o main.o &&
 g++ inout.o maths.o main.o -o topo &&
 echo Execution starts &&
-./topo ex.in
+./topo ex.in ex.out

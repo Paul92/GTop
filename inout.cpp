@@ -19,9 +19,15 @@
  *      The last precision digits are decimals. 
  *      Acutally, his value is equal with Xe4, where X is the number read.
  *
- *      int readPoint(FILE *F, string &point_id, double &distance, double &hz)
+ *      int readPoint(FILE *F, char point_id[100], 
+ *                    long long &distance, long long &hz)
  *      Reads new point data from file f. 
  *      If the point is valid, returns 1, else returns EOS.
+ *
+ *      void printPoint(FILE *f, char point_id[100], 
+ *                      long long absoluteX, long long absoluteY)
+ *      Prints in file f point_id, absoluteX, absoluteY in this order, separed 
+ *  by a whitespace.
 **/
 
 #include "inout.h"
@@ -98,3 +104,10 @@ int readPoint(FILE *f, char point_id[100], long long &distance, long long &hz){
 
 }
 
+void printPoint(FILE *f, char point_id[100], 
+                long long absoluteX, long long absoluteY){
+
+    fprintf(f, "%s %d ", point_id, absoluteX);
+    fprintf(f, "%d\n", absoluteY);
+
+}
