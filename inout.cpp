@@ -34,7 +34,8 @@
 #include<iostream>
 #include<cstdio>
 #include<cstring>
-
+#include<cmath>
+#include<cstdlib>
 #define EOS 0 //End Of Station
 #define precision 4
 
@@ -104,10 +105,51 @@ int readPoint(FILE *f, char point_id[100], long long &distance, long long &hz){
 
 }
 
+string itoa(long long nr){
+
+    string a;
+    bool negative=false;
+    if(nr<0){
+        negative=true;
+        nr*=-1;
+    }
+
+    while(nr){
+        a.push_back((nr%10)+48);
+        nr/=10;
+    }
+
+    while(a.size()<precision)
+        a.push_back('0');
+
+    a.insert(precision, ".");
+
+    string b;
+    for(int i=a.size()-1; i>=0; i--)
+        b.push_back(a[i]);
+
+    if(negative)
+        b.insert(0, "-");
+
+    return b;
+
+}
+
+void printNumber(FILE *f, long long number){
+
+    string num=itoa(number);
+
+    fprintf(f, "%s", num.c_str());
+
+}
+
 void printPoint(FILE *f, char point_id[100], 
                 long long absoluteX, long long absoluteY){
 
-    fprintf(f, "%s %d ", point_id, absoluteX);
-    fprintf(f, "%d\n", absoluteY);
+    fprintf(f, "%s ", point_id);
+    printNumber(f, absoluteX);
+    fprintf(f, " ");
+    printNumber(f, absoluteY);
+    fprintf(f, "\n");
 
 }
