@@ -9,7 +9,9 @@ using namespace std;
 
 int main(int argc, char **argv){
 
-    char* inputFileName=argv[1];
+	cout<<theta(5849668770 3921922450 5849602610 3922142130);
+
+  /*  char* inputFileName=argv[1];
     char* outputFileName=argv[2];
 
     FILE *inputFile=fopen(inputFileName, "r");
@@ -62,8 +64,6 @@ int main(int argc, char **argv){
 
     fclose(inputFile);
     fclose(outputFile);
-
-    return 0;
+    return 0;*/
     
 }
-
