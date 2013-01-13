@@ -9,8 +9,11 @@ using namespace std;
 
 int main(int argc, char **argv){
 
-	cout<<theta(5849668770 3921922450 5849602610 3922142130);
-
+	long long th=theta(5849668770, 3921922450, 5849602610, 3922142130);
+	long long o=omega(1186199, 3864592);
+	long long ori=orientation(th, o);
+	long long rx=relativeX(232360, ori);
+	cout<<cos(ori);
   /*  char* inputFileName=argv[1];
     char* outputFileName=argv[2];
 
@@ -63,7 +66,7 @@ int main(int argc, char **argv){
     }
 
     fclose(inputFile);
-    fclose(outputFile);
-    return 0;*/
+    fclose(outputFile);*/
+    return 0;
     
 }
