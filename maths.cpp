@@ -126,12 +126,11 @@ long long orientation(long long theta, long long omega){
 }
 
 long long relativeX(long long dist, long long orientation){	
-    cout<<cos(graToRad(orientation)/pow(10., precision));
-    return dist*cos(graToRad(orientation)/pow(10., precision));
+    return roundFirstDecimal(dist*cos(graToRad(orientation)/pow(10., precision)));
 }
 
 long long relativeY(long long dist, long long orientation){
-    return dist*sin(graToRad(orientation)/pow(10., precision));
+    return roundFirstDecimal(dist*sin(graToRad(orientation)/pow(10., precision)));
 }
 
 long long absoluteX(long long relativeX, long long stationX){
