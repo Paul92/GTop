@@ -68,20 +68,20 @@ long long roundFirstDecimal(long double x){
     return x;
 }
 
-long long degToRad(long long x){
-    return roundFirstDecimal(PI*x/180);
+long double degToRad(long long x){
+    return (long double)x*PI/180.;
 }
 
-long long graToRad(long long x){
-    return roundFirstDecimal(PI*x/200);
+long double graToRad(long long x){
+    return (long double)x*PI/200.;
 }
 
-long long radToDeg(long long x){
-    return roundFirstDecimal(180*x/PI);
+long double radToDeg(long long x){
+    return (long double)x*180./PI;
 }
 
 long double radToGra(long double x){
-    return roundFirstDecimal(200*x/PI);
+    return (long double)x*200./PI; 
 }
 
 
@@ -93,7 +93,7 @@ long long theta(long long stationX, long long stationY,
 
     long double fraction=(long double)top/bot;
     long double alpha=atan(fraction);
-    alpha*=pow(10, precision);
+    alpha*=pow(10., precision);
     alpha=radToGra(alpha);
     if(alpha<0) 
 		alpha*=(-1);
@@ -102,36 +102,36 @@ long long theta(long long stationX, long long stationY,
     if(top>=0 && bot>=0){
         theta=alpha;
     }else if(top<0 && bot>=0){
-        theta=400*pow(10, precision)-alpha;
+        theta=400*pow(10., precision)-alpha;
     }else if(top>=0 && bot<0){
-        theta=200*pow(10, precision)-alpha;
+        theta=200*pow(10., precision)-alpha;
     }else if(top<0 && bot<0){
-        theta=200*pow(10, precision)+alpha;
+        theta=200*pow(10., precision)+alpha;
     }
-
     return theta;
 }
 
 long long omega(long long orientHz, long long pointHz){
     long long diff=orientHz-pointHz;
     if(diff<0)
-        diff+=400*pow(10, precision);
+        diff+=400*pow(10., precision);
     return diff;
 }
 
 long long orientation(long long theta, long long omega){
 	long long orientation=theta-omega;
 	if(orientation<0)
-		orientation+=400*pow(10, precision);
+		orientation+=400*pow(10., precision);
 	return orientation;  
 }
 
 long long relativeX(long long dist, long long orientation){	
-    return (dist*cos(graToRad(orientation)/pow(10, precision)));
+    cout<<cos(graToRad(orientation)/pow(10., precision));
+    return dist*cos(graToRad(orientation)/pow(10., precision));
 }
 
 long long relativeY(long long dist, long long orientation){
-    return dist*sin(graToRad(orientation)/pow(10, precision));
+    return dist*sin(graToRad(orientation)/pow(10., precision));
 }
 
 long long absoluteX(long long relativeX, long long stationX){
