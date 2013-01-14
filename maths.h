@@ -1,7 +1,7 @@
-long long degToRad(long long);
-long long graToRad(long long);
-long long radToDeg(long long);
-long long radToGra(long long);
+long double degToRad(long long);
+long double graToRad(long long);
+long double radToDeg(long long);
+long double radToGra(long long);
 
 long long theta(long long, long long, long long, long long);
 long long omega(long long, long long);
