@@ -34,7 +34,7 @@ int main(int argc, char **argv){
 
             printPoint(outputFile, station_id, stationX, stationY);
 
-            readPoint(inputFile, orient_id, orientHz, orientDist);
+            readPoint(inputFile, orient_id, orientDist, orientHz);
 
             cout<<"Coordonata X a punctului de orientare ";
             cout<<orient_id<<" este: ";
