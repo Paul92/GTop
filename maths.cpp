@@ -94,10 +94,12 @@ long long theta(long long stationX, long long stationY,
     long double fraction=(long double)top/bot;
     long double alpha=atan(fraction);
     alpha*=pow(10., precision);
-    alpha=radToGra(alpha);
+    alpha=roundFirstDecimal(radToGra(alpha));
+
+
     if(alpha<0) 
 		alpha*=(-1);
-	
+
 	long long theta;
     if(top>=0 && bot>=0){
         theta=alpha;
