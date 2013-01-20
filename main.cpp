@@ -53,14 +53,14 @@ int main(int argc, char **argv){
 
             while(int ok=readPoint(inputFile, point_id, dist, hz)){
                 if(ok){
-                  cout<<"\nERR: "<<errors<<'\n';
                     long long orien=orientation(th, omega(orientHz, hz));
                     long long pointX=absoluteX(relativeX(dist, orien), stationX);
                     long long pointY=absoluteY(relativeY(dist, orien), stationY);
-                //    if(!checkErrors())
-                    cout<<point_id<<'\n';
+                    if(checkErrors()){
                         printPoint(outputFile, point_id, pointX, pointY);
-
+                    }else
+                        printf("%s\n", point_id);
+                    clearErrorBuff();
                 }
             }
         }

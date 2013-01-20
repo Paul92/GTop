@@ -66,6 +66,7 @@ long long readNumber(FILE *f){
 
     char a=0;
     
+   fscanf(f, "%c", &a);
     while(a==' ' || a=='\n' || a=='\t')
         fscanf(f, "%c", &a);
 
@@ -76,7 +77,7 @@ long long readNumber(FILE *f){
         else if(!isdigit(a)){
             errors=errors | 1;
         }
-        
+
         nr*=10;
         nr+=atoi(a);
         fscanf(f, "%c", &a);
@@ -90,16 +91,17 @@ long long readNumber(FILE *f){
 
     while(isdigit(a)){
         
-        if(a=='-')
+      if(a=='-')
             errors=errors | (1<<2);
         else if(!isdigit(a))
             errors=errors | 1;
-        
+      
         decimals++;
         nr*=10;
         nr+=atoi(a);
         fscanf(f, "%c", &a);
     }
+
 
     while(decimals++<precision)
         nr*=10;
@@ -119,7 +121,11 @@ int readPoint(FILE *f, char point_id[100], long long &distance, long long &hz){
 
     if(hz>=400*pow(10., precision))
         errors=errors & (1<<4);
-
+    
+/*    char a;
+    while(a!='\n')
+      fscanf(f, "%c", &a);
+  */  
     if(!strcmp(point_id, "9999") && distance==0 && hz==0){
         return 0;
     }else{
