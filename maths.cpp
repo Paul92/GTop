@@ -51,6 +51,7 @@
 
 #include<cmath>
 #include"maths.h"
+#include"error.h"
 #include<iostream>
 
 #define PI 3.1415926535897932384626433

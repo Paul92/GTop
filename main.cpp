@@ -1,9 +1,11 @@
 #include "inout.h"
 #include "maths.h"
+#include "error.h"
 #include<iostream>
 #include<cstdlib>
 #include<cstring>
 
+extern long long errors;
 
 using namespace std;
 
@@ -51,10 +53,14 @@ int main(int argc, char **argv){
 
             while(int ok=readPoint(inputFile, point_id, dist, hz)){
                 if(ok){
+                  cout<<"\nERR: "<<errors<<'\n';
                     long long orien=orientation(th, omega(orientHz, hz));
                     long long pointX=absoluteX(relativeX(dist, orien), stationX);
                     long long pointY=absoluteY(relativeY(dist, orien), stationY);
-                    printPoint(outputFile, point_id, pointX, pointY);
+                //    if(!checkErrors())
+                    cout<<point_id<<'\n';
+                        printPoint(outputFile, point_id, pointX, pointY);
+
                 }
             }
         }

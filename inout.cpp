@@ -31,15 +31,19 @@
 **/
 
 #include "inout.h"
+#include "error.h"
 #include<iostream>
 #include<cstdio>
 #include<cstring>
 #include<cmath>
 #include<cstdlib>
+
 #define EOS 0 //End Of Station
 #define precision 4
 
 using namespace std;
+
+extern long long errors;
 
 char* readStation(FILE *f){
     
@@ -62,10 +66,17 @@ long long readNumber(FILE *f){
 
     char a=0;
     
-    while(!isdigit(a))
+    while(a==' ' || a=='\n' || a=='\t')
         fscanf(f, "%c", &a);
 
     while(a!='.' && a!=' ' && a!='\t' && a!='\n'){
+
+        if(a=='-')
+            errors=errors | (1<<2);
+        else if(!isdigit(a)){
+            errors=errors | 1;
+        }
+        
         nr*=10;
         nr+=atoi(a);
         fscanf(f, "%c", &a);
@@ -78,6 +89,12 @@ long long readNumber(FILE *f){
     fscanf(f, "%c", &a);
 
     while(isdigit(a)){
+        
+        if(a=='-')
+            errors=errors | (1<<2);
+        else if(!isdigit(a))
+            errors=errors | 1;
+        
         decimals++;
         nr*=10;
         nr+=atoi(a);
@@ -96,6 +113,12 @@ int readPoint(FILE *f, char point_id[100], long long &distance, long long &hz){
 
     distance=readNumber(f);
     hz=readNumber(f);
+
+    if(distance==0 || hz==0)
+        errors=errors & (1<<3);
+
+    if(hz>=400*pow(10., precision))
+        errors=errors & (1<<4);
 
     if(!strcmp(point_id, "9999") && distance==0 && hz==0){
         return 0;
