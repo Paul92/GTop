@@ -5,7 +5,8 @@
  *    2 - negative value
  *    4 - zero value
  *    8 - angle >400
- *   16 - 
+ *   16 - not enough arguments
+ *   32 - too many arguments
 */
 
 

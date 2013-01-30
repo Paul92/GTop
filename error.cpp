@@ -19,6 +19,14 @@ void angleTooBig(){
     fprintf(stderr, "%s", "Angle exceeding 400 at point: ");
 }
 
+void notEnoughArgs(){
+    fprintf(stderr, "%s", "Not enough arguments at point: ");
+}
+
+void tooManyArgs(){
+    fprintf(stderr, "%s", "Too many arguments at point: ");
+}
+
 bool checkErrors(){
 
     bool foundErrors=false;
@@ -38,6 +46,12 @@ bool checkErrors(){
                     break;
                 case 4:
                     angleTooBig();
+                    break;
+                case 5:
+                    notEnoughArgs();
+                    break;
+                case 6:
+                    tooManyArgs();
                     break;
             }
             

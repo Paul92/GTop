@@ -56,19 +56,33 @@ char* readStation(FILE *f){
     return station_id;
 }
 
+int getline(FILE *f, char line[MAX_LINE]){
+
+    int i=0;
+    while(!feof(f)){
+        fscanf(f, "%c", &line[i++]);
+    }
+    line[--i]='\0';
+
+    return i;
+}
+
 int atoi(char a){
     return a-48;
 }
-
-long long readNumber(FILE *f){
+/*
+long long readNumber(FILE *&f, bool *readNewline){
 
     long long nr=0;
 
     char a=0;
     
    fscanf(f, "%c", &a);
-    while(a==' ' || a=='\n' || a=='\t')
+    while(a==' ' || a=='\n' || a=='\t'){
         fscanf(f, "%c", &a);
+        if(readNewline!=NULL && a=='\n')
+            *readNewline=true;
+    }
 
     while(a!='.' && a!=' ' && a!='\t' && a!='\n'){
 
@@ -76,12 +90,15 @@ long long readNumber(FILE *f){
             errors=errors | (1<<2);
         else if(!isdigit(a)){
             errors=errors | 1;
-        }
+        }else if(readNewline!=NULL && a=='\n')
+            *readNewline=true;
 
         nr*=10;
         nr+=atoi(a);
         fscanf(f, "%c", &a);
     }
+    if(readNewline!=NULL && a=='\n')
+        *readNewline=true;
 
     if(a==' ' || a=='\t' || a=='\n')
         return nr;
@@ -91,11 +108,12 @@ long long readNumber(FILE *f){
 
     while(isdigit(a)){
         
-      if(a=='-')
+        if(a=='-')
             errors=errors | (1<<2);
         else if(!isdigit(a))
             errors=errors | 1;
-      
+        else if(readNewline!=NULL && a=='\n')
+            *readNewline=true;
         decimals++;
         nr*=10;
         nr+=atoi(a);
@@ -113,25 +131,91 @@ int readPoint(FILE *f, char point_id[100], long long &distance, long long &hz){
 
     fscanf(f, "%s", point_id);
 
-    distance=readNumber(f);
-    hz=readNumber(f);
+    bool readNewline=false;
+    distance=readNumber(f, &readNewline);
+    if(readNewline)
+        errors=errors | (1<<5);
+
+    readNewline=false;
+    hz=readNumber(f, &readNewline);
+    if(!readNewline)
+        errors=errors | (1<<6);
 
     if(distance==0 || hz==0)
-        errors=errors & (1<<3);
+        errors=errors | (1<<3);
 
     if(hz>=400*pow(10., precision))
-        errors=errors & (1<<4);
+        errors=errors | (1<<4);
     
-/*    char a;
-    while(a!='\n')
-      fscanf(f, "%c", &a);
-  */  
     if(!strcmp(point_id, "9999") && distance==0 && hz==0){
         return 0;
     }else{
         return 1;
     }
 
+}
+*/
+
+void readNumber(char line[MAX_LINE], int &i, long long &number){
+
+    number=NOT_FOUND;
+
+    int n=strlen(line);
+
+    for(i=0; i<n && isblank(line[i]); i++);
+
+    if(line[i]=='-' && isdigit(line[i+1]))
+        errors=errors | (1<<1);
+
+    bool decimalPoint=false;
+    int decimals=0;
+    while(!isblank(line[i]) && line[i]!='\0'){
+        cout<<number<<'\n';
+        if(isdigit(line[i])){
+            if(number==NOT_FOUND)
+                number=0;
+            if(decimals<=precision)
+                number=number*10+atoi(line[i]);
+            decimals+=decimalPoint;
+        }else if(line[i]=='.' && !decimalPoint){
+            decimalPoint=true;
+        }else{
+            errors=errors | 1;
+        }
+        i++;
+    }
+
+
+    while(decimals<precision){
+        number*=10;
+        decimals++;
+    }
+}
+
+int readPoint(FILE *f, char point_id[100], 
+              long long &distance, long long &hz, long long &hv){
+
+    char line[MAX_LINE];
+    int n=getline(f, line);
+
+    int i;
+
+    for(i=0; i<n && isblank(line[i]); i++);
+
+    sscanf(line+i, "%s", point_id);
+
+    distance=NOT_FOUND;
+    hz=NOT_FOUND;
+    hv=NOT_FOUND;
+
+    readNumber(line, i, distance);
+    readNumber(line, i, hz);
+    readNumber(line, i, hv);
+
+    if(strcmp(point_id, "9999") && distance==0 && hz==0)
+        return 0;
+    else 
+        return 1;
 }
 
 string itoa(long long nr){
