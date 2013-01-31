@@ -61,7 +61,11 @@ int getline(FILE *f, char line[MAX_LINE]){
     int i=0;
     while(!feof(f)){
         fscanf(f, "%c", &line[i++]);
+        cout<<line[i-1];
+        if(line[i-1]=='\n')
+            break;
     }
+
     line[--i]='\0';
 
     return i;
@@ -156,13 +160,22 @@ int readPoint(FILE *f, char point_id[100], long long &distance, long long &hz){
 }
 */
 
+bool isblank(char a){
+    if(a==' ' || a=='\t')
+        return true;
+    return false;
+}
+
 void readNumber(char line[MAX_LINE], int &i, long long &number){
 
+    bool dummy=(i==-1);
     number=NOT_FOUND;
 
     int n=strlen(line);
 
-    for(i=0; i<n && isblank(line[i]); i++);
+    if(dummy) i=0;
+
+    for(; i<n && isblank(line[i]); i++);
 
     if(line[i]=='-' && isdigit(line[i+1]))
         errors=errors | (1<<1);
@@ -170,7 +183,6 @@ void readNumber(char line[MAX_LINE], int &i, long long &number){
     bool decimalPoint=false;
     int decimals=0;
     while(!isblank(line[i]) && line[i]!='\0'){
-        cout<<number<<'\n';
         if(isdigit(line[i])){
             if(number==NOT_FOUND)
                 number=0;
@@ -190,6 +202,8 @@ void readNumber(char line[MAX_LINE], int &i, long long &number){
         number*=10;
         decimals++;
     }
+
+    if(dummy) i=0;
 }
 
 int readPoint(FILE *f, char point_id[100], 
@@ -198,11 +212,17 @@ int readPoint(FILE *f, char point_id[100],
     char line[MAX_LINE];
     int n=getline(f, line);
 
+    cout<<line<<'\n';
+
     int i;
 
     for(i=0; i<n && isblank(line[i]); i++);
 
-    sscanf(line+i, "%s", point_id);
+    cout<<i<<' '<<(int)line[i]<<'\n';
+
+    i+=sscanf(line+i, "%s", point_id);
+
+    cout<<i<<'\n';
 
     distance=NOT_FOUND;
     hz=NOT_FOUND;

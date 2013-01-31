@@ -25,7 +25,7 @@ int main(int argc, char **argv){
     long long orientX, orientY, orientHz, orientDist, orientHv;
     char orient_id[100];
 
-    int dummy;
+    int dummy=-1;
 
     while(!feof(inputFile)){
         char* station_id=readStation(inputFile);
@@ -59,6 +59,7 @@ int main(int argc, char **argv){
             cout<<"\n";
             cout<<station_id<<' '<<stationX<<' '<<stationY<<'\n';
             cout<<orient_id<<' '<<orientX<<' '<<orientY<<'\n';
+            cout<<orient_id<<' '<<orientDist<<' '<<orientHz<<' '<<orientHv;
             cout<<"\n";
 
  /*           long long th=theta(stationX, stationY, orientX, orientY);
