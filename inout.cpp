@@ -45,23 +45,11 @@ using namespace std;
 
 extern long long errors;
 
-char* readStation(FILE *f){
-    
-    static char station_id[100];
-    fscanf(f, "%s", station_id);
-   
-    if(!feof(f))
-        cout<<"STATION ID: "<<station_id<<'\n';
-    
-    return station_id;
-}
-
 int getline(FILE *f, char line[MAX_LINE]){
 
     int i=0;
     while(!feof(f)){
         fscanf(f, "%c", &line[i++]);
-        cout<<line[i-1];
         if(line[i-1]=='\n')
             break;
     }
@@ -71,94 +59,17 @@ int getline(FILE *f, char line[MAX_LINE]){
     return i;
 }
 
+char* readStation(FILE *f){
+
+    static char station_id[100];
+    getline(f, station_id);
+
+    return station_id;
+}
+
 int atoi(char a){
     return a-48;
 }
-/*
-long long readNumber(FILE *&f, bool *readNewline){
-
-    long long nr=0;
-
-    char a=0;
-    
-   fscanf(f, "%c", &a);
-    while(a==' ' || a=='\n' || a=='\t'){
-        fscanf(f, "%c", &a);
-        if(readNewline!=NULL && a=='\n')
-            *readNewline=true;
-    }
-
-    while(a!='.' && a!=' ' && a!='\t' && a!='\n'){
-
-        if(a=='-')
-            errors=errors | (1<<2);
-        else if(!isdigit(a)){
-            errors=errors | 1;
-        }else if(readNewline!=NULL && a=='\n')
-            *readNewline=true;
-
-        nr*=10;
-        nr+=atoi(a);
-        fscanf(f, "%c", &a);
-    }
-    if(readNewline!=NULL && a=='\n')
-        *readNewline=true;
-
-    if(a==' ' || a=='\t' || a=='\n')
-        return nr;
-
-    int decimals=0;
-    fscanf(f, "%c", &a);
-
-    while(isdigit(a)){
-        
-        if(a=='-')
-            errors=errors | (1<<2);
-        else if(!isdigit(a))
-            errors=errors | 1;
-        else if(readNewline!=NULL && a=='\n')
-            *readNewline=true;
-        decimals++;
-        nr*=10;
-        nr+=atoi(a);
-        fscanf(f, "%c", &a);
-    }
-
-
-    while(decimals++<precision)
-        nr*=10;
-
-    return nr;
-}
-
-int readPoint(FILE *f, char point_id[100], long long &distance, long long &hz){
-
-    fscanf(f, "%s", point_id);
-
-    bool readNewline=false;
-    distance=readNumber(f, &readNewline);
-    if(readNewline)
-        errors=errors | (1<<5);
-
-    readNewline=false;
-    hz=readNumber(f, &readNewline);
-    if(!readNewline)
-        errors=errors | (1<<6);
-
-    if(distance==0 || hz==0)
-        errors=errors | (1<<3);
-
-    if(hz>=400*pow(10., precision))
-        errors=errors | (1<<4);
-    
-    if(!strcmp(point_id, "9999") && distance==0 && hz==0){
-        return 0;
-    }else{
-        return 1;
-    }
-
-}
-*/
 
 bool isblank(char a){
     if(a==' ' || a=='\t')
@@ -212,17 +123,11 @@ int readPoint(FILE *f, char point_id[100],
     char line[MAX_LINE];
     int n=getline(f, line);
 
-    cout<<line<<'\n';
-
     int i;
 
     for(i=0; i<n && isblank(line[i]); i++);
 
-    cout<<i<<' '<<(int)line[i]<<'\n';
-
     i+=sscanf(line+i, "%s", point_id);
-
-    cout<<i<<'\n';
 
     distance=NOT_FOUND;
     hz=NOT_FOUND;

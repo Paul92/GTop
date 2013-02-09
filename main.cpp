@@ -31,6 +31,8 @@ int main(int argc, char **argv){
         char* station_id=readStation(inputFile);
         if(!feof(inputFile)){
 
+            cout<<"STATION ID: "<<station_id<<'\n';
+
             cout<<"Coordonata X a statiei "<<station_id<<" este: ";
             fscanf(stdin, "%s", line);
             readNumber(line, dummy, stationX);
@@ -62,7 +64,7 @@ int main(int argc, char **argv){
             cout<<orient_id<<' '<<orientDist<<' '<<orientHz<<' '<<orientHv;
             cout<<"\n";
 
- /*           long long th=theta(stationX, stationY, orientX, orientY);
+            long long th=theta(stationX, stationY, orientX, orientY);
 
             while(int ok=readPoint(inputFile, point_id, dist, hz, hv)){
                 if(ok){
@@ -76,7 +78,7 @@ int main(int argc, char **argv){
                     clearErrorBuff();
                 }
             }
-   */    }
+        }
     }
 
     fclose(inputFile);
