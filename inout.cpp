@@ -127,7 +127,8 @@ int readPoint(FILE *f, char point_id[100],
 
     for(i=0; i<n && isblank(line[i]); i++);
 
-    i+=sscanf(line+i, "%s", point_id);
+    sscanf(line+i, "%s", point_id);
+    i+=strlen(point_id);
 
     distance=NOT_FOUND;
     hz=NOT_FOUND;
@@ -137,7 +138,7 @@ int readPoint(FILE *f, char point_id[100],
     readNumber(line, i, hz);
     readNumber(line, i, hv);
 
-    if(strcmp(point_id, "9999") && distance==0 && hz==0)
+    if(!strcmp(point_id, "9999") && distance==0 && hz==0)
         return 0;
     else 
         return 1;

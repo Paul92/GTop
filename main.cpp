@@ -48,6 +48,7 @@ int main(int argc, char **argv){
             cout<<"Coordonata X a punctului de orientare ";
             cout<<orient_id<<" este: ";
             fscanf(stdin, "%s", line);
+            cout<<line<<'\n';
             readNumber(line, dummy, orientX);
 
             cout<<"Coordonata Y a punctului de orientare ";
