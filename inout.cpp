@@ -93,6 +93,7 @@ void readNumber(char line[MAX_LINE], int &i, long long &number){
 
     bool decimalPoint=false;
     int decimals=0;
+
     while(!isblank(line[i]) && line[i]!='\0'){
         if(isdigit(line[i])){
             if(number==NOT_FOUND)

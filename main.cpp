@@ -35,10 +35,12 @@ int main(int argc, char **argv){
 
             cout<<"Coordonata X a statiei "<<station_id<<" este: ";
             fscanf(stdin, "%s", line);
+            dummy=-1;
             readNumber(line, dummy, stationX);
 
             cout<<"Coordonata Y a statiei "<<station_id<<" este: ";
             fscanf(stdin, "%s", line);
+            dummy=-1;
             readNumber(line, dummy, stationY);
 
             printPoint(outputFile, station_id, stationX, stationY);
@@ -48,12 +50,13 @@ int main(int argc, char **argv){
             cout<<"Coordonata X a punctului de orientare ";
             cout<<orient_id<<" este: ";
             fscanf(stdin, "%s", line);
-            cout<<line<<'\n';
+            dummy=-1;
             readNumber(line, dummy, orientX);
 
             cout<<"Coordonata Y a punctului de orientare ";
             cout<<orient_id<<" este: ";
             fscanf(stdin, "%s", line);
+            dummy=-1;
             readNumber(line, dummy, orientY);
 
             printPoint(outputFile, orient_id, orientX, orientY);
