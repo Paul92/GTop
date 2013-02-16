@@ -62,16 +62,23 @@ int main(int argc, char **argv){
             printPoint(outputFile, orient_id, orientX, orientY);
             fprintf(outputFile, "\n");
 
-            cout<<"\n";
-            cout<<station_id<<' '<<stationX<<' '<<stationY<<'\n';
-            cout<<orient_id<<' '<<orientX<<' '<<orientY<<'\n';
-            cout<<orient_id<<' '<<orientDist<<' '<<orientHz<<' '<<orientHv;
-            cout<<"\n";
+            if(orientDist==NOT_FOUND || orientHz==NOT_FOUND){
+                errors=errors | (1<<5);
+            }
+           
+            if(!checkErrors())
+                printf("%s\n", orient_id);
 
             long long th=theta(stationX, stationY, orientX, orientY);
 
+            cout<<errors;
+
             while(int ok=readPoint(inputFile, point_id, dist, hz, hv)){
                 if(ok){
+                    if(dist==NOT_FOUND || hz==NOT_FOUND){
+                        errors=errors | (1<<5);
+                    }
+                    cout<<point_id<<' '<<dist<<' '<<hz<<' '<<errors<<'\n';
                     long long orien=orientation(th, omega(orientHz, hz));
                     long long pointX=absoluteX(relativeX(dist, orien), stationX);
                     long long pointY=absoluteY(relativeY(dist, orien), stationY);

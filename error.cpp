@@ -12,7 +12,7 @@ void negativeValue(){
 }
 
 void zeroValue(){
-    fprintf(stderr, "%s", "Zero value at point: ");
+    fprintf(stderr, "%s", "Zero distance at point: ");
 }
 
 void angleTooBig(){
@@ -35,7 +35,7 @@ bool checkErrors(){
         if(errors & (1<<i)){
             foundErrors=true;
             switch(i){
-                case 1: 
+                case 0: 
                     bizzareChars();
                     break;
                 case 2:

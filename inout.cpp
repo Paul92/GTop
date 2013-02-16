@@ -88,10 +88,14 @@ void readNumber(char line[MAX_LINE], int &i, long long &number){
 
     for(; i<n && isblank(line[i]); i++);
 
-    if(line[i]=='-' && isdigit(line[i+1]))
-        errors=errors | (1<<1);
-
     bool decimalPoint=false;
+
+    if((isblank(line[i-1]) && line[i]=='-' && isdigit(line[i+1])) ||
+       (line[i]=='-' && line[i+1]=='.' && !decimalPoint && isdigit(line[i+2]))){
+        errors=errors | (1<<2);
+        i++;
+    }
+
     int decimals=0;
 
     while(!isblank(line[i]) && line[i]!='\0'){
@@ -109,8 +113,7 @@ void readNumber(char line[MAX_LINE], int &i, long long &number){
         i++;
     }
 
-
-    while(decimals<precision){
+    while(decimals<precision && number>0){
         number*=10;
         decimals++;
     }
@@ -138,6 +141,16 @@ int readPoint(FILE *f, char point_id[100],
     readNumber(line, i, distance);
     readNumber(line, i, hz);
     readNumber(line, i, hv);
+
+    if(distance==0)
+        errors=errors|(1<<3);
+    if(hz>=400*pow(10., precision) || hv>=400*pow(10., precision))
+        errors=errors|(1<<4);
+
+    for(;i<n; i++){
+        if(!isblank(line[i]))
+            errors=errors|(1<<6);
+    }
 
     if(!strcmp(point_id, "9999") && distance==0 && hz==0)
         return 0;
