@@ -90,7 +90,7 @@ int main(int argc, char **argv){
 
                     
 
-                    long long pointHeight=height(dist, hv);
+                    long long pointHeight=height(stationHeight, dist, hv);
 
                     if(checkErrors()){
                         printPoint(outputFile, point_id, pointX, pointY, pointHeight);
