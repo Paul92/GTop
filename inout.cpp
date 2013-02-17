@@ -197,12 +197,16 @@ void printNumber(FILE *f, long long number){
 }
 
 void printPoint(FILE *f, char point_id[100], 
-                long long absoluteX, long long absoluteY){
+                long long absoluteX, long long absoluteY, long long height){
 
     fprintf(f, "%s ", point_id);
     printNumber(f, absoluteX);
     fprintf(f, " ");
     printNumber(f, absoluteY);
     fprintf(f, "\n");
+    if(height>=0){
+        printNumber(f, height);
+        printf(f, "\n");
+    }
 
 }

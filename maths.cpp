@@ -144,3 +144,13 @@ long long absoluteY(long long relativeY, long long stationY){
     return relativeY+stationY;
 }
 
+long long height(long long distance, long long hv){
+
+    if(hv>=0){
+        long long phi=100*pow(10., precision)-v;
+        return distance*tan(phi/pow(10., precision));
+    }else{
+        return -1;
+    }
+
+}

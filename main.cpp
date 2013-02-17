@@ -82,8 +82,11 @@ int main(int argc, char **argv){
                     long long orien=orientation(th, omega(orientHz, hz));
                     long long pointX=absoluteX(relativeX(dist, orien), stationX);
                     long long pointY=absoluteY(relativeY(dist, orien), stationY);
+
+                    long long pointHeight=height(dist, hv);
+
                     if(checkErrors()){
-                        printPoint(outputFile, point_id, pointX, pointY);
+                        printPoint(outputFile, point_id, pointX, pointY, pointHeight);
                     }else
                         printf("%s\n", point_id);
                     clearErrorBuff();
