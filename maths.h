@@ -13,3 +13,4 @@ long long relativeY(long long, long long);
 long long absoluteX(long long, long long);
 long long absoluteY(long long, long long);
 
+long long height(long long, long long);

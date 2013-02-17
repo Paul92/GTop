@@ -43,7 +43,12 @@ int main(int argc, char **argv){
             dummy=-1;
             readNumber(line, dummy, stationY);
 
-            printPoint(outputFile, station_id, stationX, stationY);
+            cout<<"Cota statiei "<<station_id<<" este: ";
+            fscanf(stdin, "%s", line);
+            dummy=-1;
+            readNumber(line, dummy, stationY);
+            
+            printPoint(outputFile, station_id, stationX, stationY, stationHeight);
 
             readPoint(inputFile, orient_id, orientDist, orientHz, orientHv);
 
@@ -59,7 +64,7 @@ int main(int argc, char **argv){
             dummy=-1;
             readNumber(line, dummy, orientY);
 
-            printPoint(outputFile, orient_id, orientX, orientY);
+            printPoint(outputFile, orient_id, orientX, orientY, orientHv);
             fprintf(outputFile, "\n");
 
             if(orientDist==NOT_FOUND || orientHz==NOT_FOUND){

@@ -206,7 +206,7 @@ void printPoint(FILE *f, char point_id[100],
     fprintf(f, "\n");
     if(height>=0){
         printNumber(f, height);
-        printf(f, "\n");
+        fprintf(f, "\n");
     }
 
 }
