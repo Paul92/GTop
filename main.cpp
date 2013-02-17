@@ -46,7 +46,7 @@ int main(int argc, char **argv){
             cout<<"Cota statiei "<<station_id<<" este: ";
             fscanf(stdin, "%s", line);
             dummy=-1;
-            readNumber(line, dummy, stationY);
+            readNumber(line, dummy, stationHeight);
             
             printPoint(outputFile, station_id, stationX, stationY, stationHeight);
 
@@ -76,7 +76,7 @@ int main(int argc, char **argv){
 
             long long th=theta(stationX, stationY, orientX, orientY);
 
-            cout<<errors;
+            cout<<th<<'\n';
 
             while(int ok=readPoint(inputFile, point_id, dist, hz, hv)){
                 if(ok){
@@ -87,6 +87,8 @@ int main(int argc, char **argv){
                     long long orien=orientation(th, omega(orientHz, hz));
                     long long pointX=absoluteX(relativeX(dist, orien), stationX);
                     long long pointY=absoluteY(relativeY(dist, orien), stationY);
+
+                    
 
                     long long pointHeight=height(dist, hv);
 

@@ -203,10 +203,10 @@ void printPoint(FILE *f, char point_id[100],
     printNumber(f, absoluteX);
     fprintf(f, " ");
     printNumber(f, absoluteY);
-    fprintf(f, "\n");
     if(height>=0){
+        fprintf(f, " ");
         printNumber(f, height);
-        fprintf(f, "\n");
     }
+    fprintf(f, "\n");
 
 }
