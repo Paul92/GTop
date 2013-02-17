@@ -43,7 +43,7 @@ int main(int argc, char **argv){
             dummy=-1;
             readNumber(line, dummy, stationY);
 
-            cout<<"Cota statiei "<<station_id<<" este: ";
+            cout<<"Coordonata Z a statiei "<<station_id<<" este: ";
             fscanf(stdin, "%s", line);
             dummy=-1;
             readNumber(line, dummy, stationHeight);
@@ -86,10 +86,7 @@ int main(int argc, char **argv){
                     cout<<point_id<<' '<<dist<<' '<<hz<<' '<<errors<<'\n';
                     long long orien=orientation(th, omega(orientHz, hz));
                     long long pointX=absoluteX(relativeX(dist, orien), stationX);
-                    long long pointY=absoluteY(relativeY(dist, orien), stationY);
-
-                    
-
+                    long long pointY=absoluteY(relativeY(dist, orien), stationY);                  
                     long long pointHeight=height(stationHeight, dist, hv);
 
                     if(checkErrors()){

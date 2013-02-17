@@ -148,7 +148,7 @@ long long height(long long stationHeight, long long distance, long long hv){
 
     if(hv>=0){
         long long phi=100*pow(10., precision)-hv;
-        return distance*tan(phi/pow(10., precision))+stationHeight;
+        return distance*tan(graToRad(phi)/pow(10., precision))+stationHeight;
     }else{
         return -1;
     }
