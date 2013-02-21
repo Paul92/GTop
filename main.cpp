@@ -19,7 +19,7 @@ int main(int argc, char **argv){
     if(strcmp(argv[1], "-r")==0){
         return radiere(0, argv+1);
     }else if(strcmp(argv[1], "-d")==0){
-        cout<<"drumuire";
+        return drumuire(0, argv+1);
     }else if(strcmp(argv[1], "-dr")==0){
         cout<<"both";
     }

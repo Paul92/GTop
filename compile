@@ -2,6 +2,7 @@ g++ -c inout.cpp -o inout.o &&
 g++ -Wall -c maths.cpp -o maths.o &&
 g++ -Wall -c error.cpp -o error.o &&
 g++ -Wall -c radiere.cpp -o radiere.o &&
+g++ -Wall -c drumuire.cpp -o drumuire.o &&
 g++ -Wall -c main.cpp -o main.o &&
 g++ -Wall inout.o maths.o error.o radiere.o main.o -o topo &&
 echo Execution starts &&
