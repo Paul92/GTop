@@ -43,7 +43,7 @@ int radiere(int argc, char **argv){
             dummy=-1;
             readNumber(line, dummy, stationY);
 
-            cout<<"Cota statiei "<<station_id<<" este: ";
+            cout<<"Coordonata Z a statiei "<<station_id<<" este: ";
             fscanf(stdin, "%s", line);
             dummy=-1;
             readNumber(line, dummy, stationHeight);
