@@ -1,0 +1,2 @@
+int radiere(int, char**);
+
