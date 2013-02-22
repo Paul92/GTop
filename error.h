@@ -7,6 +7,8 @@
  *    8 - angle >400
  *   16 - not enough arguments
  *   32 - too many arguments
+ *   64 - wrong point order (path)
+ *   128 - too many/little points
 */
 
 
