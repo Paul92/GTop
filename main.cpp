@@ -1,5 +1,5 @@
 #include "radiere.h"
-//#include "drumuire.h"
+#include "drumuire.h"
 
 #include<cstring>
 #include<cstdio>
@@ -15,7 +15,7 @@ int main(int argc, char **argv){
     }else if(argc>4){
         printf("Prea multe argumente\n");
     }
-    
+
     if(strcmp(argv[1], "-r")==0){
         return radiere(0, argv+1);
     }else if(strcmp(argv[1], "-d")==0){
