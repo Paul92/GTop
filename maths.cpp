@@ -154,3 +154,13 @@ long long height(long long stationHeight, long long distance, long long hv){
     }
 
 }
+
+void repairAngle(long long angle){
+
+    if(angle<0){
+        angle+=400;
+    }else if(angle>=400){
+        angle-=400;
+    }
+
+}
