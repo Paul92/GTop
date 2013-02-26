@@ -49,8 +49,6 @@ int drumuire(int argc, char **argv){
     FILE *inputFile=fopen(inputFileName, "r");
     FILE *outputFile=fopen(outputFileName, "w");
 
-//    cout<<"A";
-
     char line[MAX_LINE];
     char point_id[100];
     long long dist, hz;
@@ -60,44 +58,38 @@ int drumuire(int argc, char **argv){
 
     long long dummy=0;
 
-    char* temp;//=(char*)malloc(100);
     char currentPoint_id[100];
 
     long long count;
 
-
-   while(!feof(inputFile)){
+    while(!feof(inputFile)){
         char* station_id=readStation(inputFile);
-//        cout<<station_id<<'\n';
-        strcpy(points[pointsIndex].point_id, station_id);
         if(!feof(inputFile)){
+            strcpy(points[pointsIndex].point_id, station_id);
             count=0;
             if(pointsIndex>0 && strcmp(currentPoint_id, points[pointsIndex].point_id)!=0)
                 errors=errors|(1<<6);
             count+=readPoint(inputFile, currentPoint_id, 
                       points[pointsIndex].beforeDist, points[pointsIndex].beforeHz, dummy);
-            pointsIndex++;
+            //pointsIndex++;
             if(pointsIndex>0 && strcmp(currentPoint_id, points[pointsIndex-1].point_id)!=0)
                 errors=errors|(1<<6);
             count+=readPoint(inputFile, currentPoint_id,
                       points[pointsIndex].nextDist, points[pointsIndex].nextHz, dummy);
-//            pointsIndex++;
+
+            pointsIndex++;
             count+=readPoint(inputFile, currentPoint_id, dummy, dummy, dummy);
             if(count!=2){
                 errors=errors|(1<<7);
             }
         }
     }
-//   cout<<points[0].point_id;
 
-    for(int i=0; i<pointsIndex; i++){
-//        cout<<i;
-       fprintf(stderr, "%s", points[i].point_id);
-  }
+    for(int i=0; i<pointsIndex-1; i++){
+       printf("%s %lld %lld %lld %lld\n", points[i].point_id, points[i].nextDist, points[i].nextHz,
+                                            points[i].beforeDist, points[i].beforeHz );
+    }
 
-//    cout<<"A";
-
-  //  free(temp);
 
     return 0;
 

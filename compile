@@ -4,6 +4,6 @@ g++ -Wall -c error.cpp -o error.o &&
 g++ -Wall -c radiere.cpp -o radiere.o &&
 g++ -Wall -c drumuire.cpp -o drumuire.o &&
 g++ -Wall -c main.cpp -o main.o &&
-g++ -Wall inout.o maths.o error.o radiere.o main.o -o topo &&
+g++ -Wall inout.o maths.o error.o radiere.o drumuire.o main.o -o topo &&
 echo Execution starts &&
-./topo -r ex2.in ex.out
+./topo -d drumuire.in ex.out

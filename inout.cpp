@@ -59,22 +59,30 @@ int getline(FILE *f, char line[MAX_LINE]){
     return i;
 }
 
+bool isblank(char a){
+    if(a<=' ')
+        return true;
+    return false;
+}
+
 char* readStation(FILE *f){
 
     static char station_id[100];
-    getline(f, station_id);
+    char temp[100];
+    getline(f, temp);
+
+    int i=0;
+
+    do{
+        station_id[i]=temp[i];
+    }while(temp[++i] && !isblank(temp[i]));
+    station_id[i]='\0';
 
     return station_id;
 }
 
 int atoi(char a){
     return a-48;
-}
-
-bool isblank(char a){
-    if(a==' ' || a=='\t')
-        return true;
-    return false;
 }
 
 void readNumber(char line[MAX_LINE], int &i, long long &number){
