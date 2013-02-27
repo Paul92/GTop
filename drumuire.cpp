@@ -28,10 +28,6 @@ int drumuire(int argc, char **argv){
     FILE *inputFile=fopen(inputFileName, "r");
     FILE *outputFile=fopen(outputFileName, "w");
 
-    char line[MAX_LINE];
-    char point_id[100];
-    long long dist, hz;
-
     point points[100];
     int pointsIndex=1;
 
@@ -40,24 +36,24 @@ int drumuire(int argc, char **argv){
 
     char currentPoint_id[100];
 
-    long long count;
+    long long count=0;
 
     point orient;
 
     char* station_id;
     station_id=readStation(inputFile);
     strcpy(points[0].point_id, station_id);
-    count+=readPoint(inputFile, currentPointId, orient.beforeDist, orient.beforeHz, dummy);
-    strcpy(orient.point_id, currentPointId);
-    count+=readPoint(inputFile, currentPointId, points[0].afterDist, points[0].afterHz, dummy);
-    count+=readPoint(inputfile, currentPointId, dummy, dummy, dummy);
+    count+=readPoint(inputFile, currentPoint_id, orient.beforeDist, orient.beforeHz, dummy);
+    strcpy(orient.point_id, currentPoint_id);
+    count+=readPoint(inputFile, currentPoint_id, points[0].nextDist, points[0].nextHz, dummy);
+    count+=readPoint(inputFile, currentPoint_id, dummy, dummy, dummy);
 
     if(count!=2)
         errors=errors|(1<<7);
 
     long long alpha;
-    alpha=abs(points[0].afterHz, orient.beforeHz);
-    repairAngle(alpha);
+    alpha=abs(points[0].nextHz-orient.beforeHz);
+    alpha=repairAngle(alpha);
 
     long long betaSum=0;
 
@@ -77,8 +73,8 @@ int drumuire(int argc, char **argv){
             count+=readPoint(inputFile, currentPoint_id,
                       points[pointsIndex].nextDist, points[pointsIndex].nextHz, dummy);
             
-            points[pointsIndex].beta=abs(points[pointsIndex].beforeHz-points[pointsIndex].afterHz);
-            repairAngle(points[pointsIndex].beta);
+            points[pointsIndex].beta=abs(points[pointsIndex].beforeHz-points[pointsIndex].nextHz);
+            points[pointsIndex].beta=repairAngle(points[pointsIndex].beta);
 
             betaSum+=points[pointsIndex].beta;
 
@@ -90,7 +86,7 @@ int drumuire(int argc, char **argv){
         }
     }
 
-    long long correction=200*(pointsIndex-2)-betaSum
+    long long correction=200*(pointsIndex-2)-betaSum;
 
     return 0;
 
