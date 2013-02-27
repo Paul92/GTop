@@ -10,7 +10,6 @@ extern long long errors;
 
 using namespace std;
 
-
 struct point{
     char point_id[100];
     long long nextDist;
@@ -18,6 +17,7 @@ struct point{
     long long beforeDist;
     long long beforeHz;
     long long beta;
+    long long theta;      //between this point and the next one
 };
 
 int drumuire(int argc, char **argv){
@@ -33,6 +33,29 @@ int drumuire(int argc, char **argv){
 
     long long dummy=0;
     char dummyChar[100];
+    char line[100];
+
+    long long stationX, stationY, orientX, orientY;
+
+    cout<<"Coordonata X a statiei de plecare este: ";
+    fscanf(stdin, "%s", line);
+    dummy=-1;
+    readNumber(line, dummy, stationX);
+
+    cout<<"Coordonata Y a statiei de plecare este: ";
+    fscanf(stdin, "%s", line);
+    dummy=-1;
+    readNumber(line, dummy, stationY);
+
+    cout<<"Coordonata X a bornei de orientare este: ";
+    fscanf(stdin, "%s", line);
+    dummy=-1;
+    readNumber(line, dummy, orientX);
+
+    cout<<"Coordonata Y a bornei de orientare este: ";
+    fscanf(stdin, "%s", line);
+    dummy=-1;
+    readNumber(line, dummy, orientY);
 
     char currentPoint_id[100];
 
@@ -56,7 +79,7 @@ int drumuire(int argc, char **argv){
     alpha=repairAngle(alpha);
 
     long long betaSum=0;
-
+    
     while(!feof(inputFile)){
         station_id=readStation(inputFile);
         if(!feof(inputFile)){
@@ -86,7 +109,19 @@ int drumuire(int argc, char **argv){
         }
     }
 
+    points[0].beforeDist=points[pointsIndex-1].nextDist;
+    points[0].beforeHz=points[pointsIndex-1].nextHz;
+    points[0].beta=abs(points[0].beforeHz-points[0].nextHz);
+    points[0].beta=repairAngle(points[0].beta);
+
     long long correction=200*(pointsIndex-2)-betaSum;
+
+    long long th=theta(stationX, stationY, orientX, orientY);
+    points[0].theta=ac+alpha;
+
+    for(int i=0; i<pointsIndex; i++){
+        points[i].beta+=correction;
+    }
 
     return 0;
 
