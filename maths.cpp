@@ -155,7 +155,7 @@ long long height(long long stationHeight, long long distance, long long hv){
 
 }
 
-void repairAngle(long long angle){
+long long repairAngle(long long angle){
 
     if(angle<0){
         angle+=400;
