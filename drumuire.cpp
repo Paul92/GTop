@@ -59,6 +59,8 @@ int drumuire(int argc, char **argv){
     alpha=abs(points[0].afterHz, orient.beforeHz);
     repairAngle(alpha);
 
+    long long betaSum=0;
+
     while(!feof(inputFile)){
         station_id=readStation(inputFile);
         if(!feof(inputFile)){
@@ -76,7 +78,9 @@ int drumuire(int argc, char **argv){
                       points[pointsIndex].nextDist, points[pointsIndex].nextHz, dummy);
             
             points[pointsIndex].beta=abs(points[pointsIndex].beforeHz-points[pointsIndex].afterHz);
-            repairAngle(points[pointIndex].beta);
+            repairAngle(points[pointsIndex].beta);
+
+            betaSum+=points[pointsIndex].beta;
 
             pointsIndex++;
             count+=readPoint(inputFile, dummyChar, dummy, dummy, dummy);
@@ -86,7 +90,7 @@ int drumuire(int argc, char **argv){
         }
     }
 
-
+    long long correction=200*(pointsIndex-2)-betaSum
 
     return 0;
 
