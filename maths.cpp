@@ -47,6 +47,12 @@
  *      long long absoluteY(long long relativeY, long long stationY)
  *      Computes absolute position Y of a point, based on his relative
  *  Y position and the Y position of station.
+ *
+ *      long long repairAngle(long long angle)
+ *      If angle isn't between 0 and 400, this function brings it to this
+ *  interval. CAUTION: It only adds or subtracts 400, so this works only for
+ *  one full circle.
+ *
  */
 
 #include<cmath>

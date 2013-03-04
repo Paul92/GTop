@@ -8,11 +8,20 @@
  *      precision - values are real values times 10^precision
  *
  *  Functions:
+ *      
+ *      int getline(FILE *f, char line[LINE_MAX])
+ *      Reads a line form the file f. A line ends at /n character or at the end
+ *  of the file.
+ *
  *      char *readStation(FILE *f)
  *      Reads a station id from file f and returns a pointer to it.
  *
  *      int atoi(char a)
  *      Returns integer value of digit expressed by char a.
+ *
+ *      bool isblank(char a)
+ *      Returns false if a<=32, true otherwise. All blank characters have 
+ *  values smaller than 32, but they ar not the only. BE CAUTIOS!
  *
  *      long long readNumber(FILE *f)
  *      Reads from file f a floating point number as a long long. 
@@ -23,6 +32,9 @@
  *                    long long &distance, long long &hz)
  *      Reads new point data from file f. 
  *      If the point is valid, returns 1, else returns EOS.
+ *
+ *      string itoa(long long nr)
+ *      Converts nr to a string.
  *
  *      void printPoint(FILE *f, char point_id[100], 
  *                      long long absoluteX, long long absoluteY)
