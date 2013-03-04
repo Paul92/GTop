@@ -85,33 +85,41 @@ long double radToGra(long double x){
     return (long double)x*200./PI; 
 }
 
-
 long long theta(long long stationX, long long stationY, 
                 long long orientX,  long long orientY){
 
     long long top=orientY-stationY;
     long long bot=orientX-stationX;
+ 
+    long long theta;
+
+    if (bot==0){
+      if (orientY > stationY)
+	theta=100*pow(10., precision);
+      else
+	theta=300*pow(10., precision);
+      return theta;
+    }
 
     long double fraction=(long double)top/bot;
+
     long double alpha=atan(fraction);
     alpha*=pow(10., precision);
     alpha=roundFirstDecimal(radToGra(alpha));
 
-
     if(alpha<0) 
-		alpha*=(-1);
+      alpha*=(-1);
 
-	long long theta;
-    if(top>=0 && bot>=0){
+    if(top>=0 && bot>0){
         theta=alpha;
-    }else if(top<0 && bot>=0){
+    }else if(top<0 && bot>0){
         theta=400*pow(10., precision)-alpha;
     }else if(top>=0 && bot<0){
         theta=200*pow(10., precision)-alpha;
     }else if(top<0 && bot<0){
         theta=200*pow(10., precision)+alpha;
     }
-    return theta;
+    return theta;    
 }
 
 long long omega(long long orientHz, long long pointHz){
@@ -152,17 +160,5 @@ long long height(long long stationHeight, long long distance, long long hv){
     }else{
         return -1;
     }
-
-}
-
-long long repairAngle(long long angle){
-
-    if(angle<0){
-        angle+=400;
-    }else if(angle>=400){
-        angle-=400;
-    }
-
-    return angle;
 
 }
