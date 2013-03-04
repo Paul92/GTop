@@ -31,7 +31,7 @@ int drumuire(int argc, char **argv){
     point points[100];
     int pointsIndex=1;
 
-    long long dummy=0;
+    int dummyInt=0;
     char dummyChar[100];
     char line[100];
 
@@ -39,27 +39,28 @@ int drumuire(int argc, char **argv){
 
     cout<<"Coordonata X a statiei de plecare este: ";
     fscanf(stdin, "%s", line);
-    dummy=-1;
-    readNumber(line, dummy, stationX);
+    dummyInt=-1;
+    readNumber(line, dummyInt, stationX);
 
     cout<<"Coordonata Y a statiei de plecare este: ";
     fscanf(stdin, "%s", line);
-    dummy=-1;
-    readNumber(line, dummy, stationY);
+    dummyInt=-1;
+    readNumber(line, dummyInt, stationY);
 
     cout<<"Coordonata X a bornei de orientare este: ";
     fscanf(stdin, "%s", line);
-    dummy=-1;
-    readNumber(line, dummy, orientX);
+    dummyInt=-1;
+    readNumber(line, dummyInt, orientX);
 
     cout<<"Coordonata Y a bornei de orientare este: ";
     fscanf(stdin, "%s", line);
-    dummy=-1;
-    readNumber(line, dummy, orientY);
+    dummyInt=-1;
+    readNumber(line, dummyInt, orientY);
 
     char currentPoint_id[100];
 
-    long long count=0;
+    int count=0;
+    long long dummy;
 
     point orient;
 
@@ -109,7 +110,7 @@ int drumuire(int argc, char **argv){
         }
     }
 
-    points[0].beforeDist=points[pointsIndex-1].nextDist;
+/*    points[0].beforeDist=points[pointsIndex-1].nextDist;
     points[0].beforeHz=points[pointsIndex-1].nextHz;
     points[0].beta=abs(points[0].beforeHz-points[0].nextHz);
     points[0].beta=repairAngle(points[0].beta);
@@ -122,7 +123,7 @@ int drumuire(int argc, char **argv){
     for(int i=0; i<pointsIndex; i++){
         points[i].beta+=correction;
     }
-
+*/
     return 0;
 
 }
