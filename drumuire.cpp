@@ -110,6 +110,11 @@ int drumuire(int argc, char **argv){
         }
     }
 
+    for(int i=0; i<pointsIndex; i++){
+            cout<<points[i].point_id<<' '<<points[i].beta<<'\n';
+    }
+
+
 /*    points[0].beforeDist=points[pointsIndex-1].nextDist;
     points[0].beforeHz=points[pointsIndex-1].nextHz;
     points[0].beta=abs(points[0].beforeHz-points[0].nextHz);
