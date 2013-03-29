@@ -65,7 +65,7 @@
 
 using namespace std;
 
-long long roundFirstDecimal(long double x){
+double roundFirstDecimal(double x){
 
     long long p=x*10;
     if(p%10>=5){
@@ -75,42 +75,41 @@ long long roundFirstDecimal(long double x){
     return x;
 }
 
-long double degToRad(long long x){
-    return (long double)x*PI/180.;
+double degToRad(double x){
+    return x*PI/180.;
 }
 
-long double graToRad(long long x){
-    return (long double)x*PI/200.;
+double graToRad(double x){
+    return x*PI/200.;
 }
 
-long double radToDeg(long long x){
-    return (long double)x*180./PI;
+double radToDeg(double x){
+    return x*180./PI;
 }
 
-long double radToGra(long double x){
-    return (long double)x*200./PI; 
+double radToGra(double x){
+    return x*200./PI; 
 }
 
-long long theta(long long stationX, long long stationY, 
-                long long orientX,  long long orientY){
+double theta(double stationX, double stationY, 
+             double orientX,  double orientY){
 
-    long long top=orientY-stationY;
-    long long bot=orientX-stationX;
+    double top=orientY-stationY;
+    double bot=orientX-stationX;
  
-    long long theta;
+    double theta;
 
     if(bot==0){
         if(orientY > stationY)
-            theta=100*pow(10., precision);
+            theta=100;
         else
-            theta=300*pow(10., precision);
+            theta=300;
         return theta;
     }
 
-    long double fraction=(long double)top/bot;
+    double fraction=top/bot;
 
-    long double alpha=atan(fraction);
-    alpha*=pow(10., precision);
+    double alpha=atan(fraction);
     alpha=roundFirstDecimal(radToGra(alpha));
 
     if(alpha<0)
@@ -119,46 +118,46 @@ long long theta(long long stationX, long long stationY,
     if(top>=0 && bot>0){
         theta=alpha;
     }else if(top<0 && bot>0){
-        theta=400*pow(10., precision)-alpha;
+        theta=400-alpha;
     }else if(top>=0 && bot<0){
-        theta=200*pow(10., precision)-alpha;
+        theta=200-alpha;
     }else if(top<0 && bot<0){
-        theta=200*pow(10., precision)+alpha;
+        theta=200+alpha;
     }
     return theta;
 }
 
-long long omega(long long orientHz, long long pointHz){
-    long long diff=orientHz-pointHz;
+double omega(double orientHz, double pointHz){
+    double diff=orientHz-pointHz;
     if(diff<0)
-        diff+=400*pow(10., precision);
+        diff+=400;
     return diff;
 }
 
-long long orientation(long long theta, long long omega){
-	long long orientation=theta-omega;
+double orientation(double theta, double omega){
+	double orientation=theta-omega;
 	if(orientation<0)
-		orientation+=400*pow(10., precision);
+		orientation+=400;
 	return orientation;  
 }
 
-long long relativeX(long long dist, long long orientation){	
-    return roundFirstDecimal(dist*cos(graToRad(orientation)/pow(10., precision)));
+double relativeX(double dist, double orientation){	
+    return roundFirstDecimal(dist*cos(graToRad(orientation));
 }
 
-long long relativeY(long long dist, long long orientation){
-    return roundFirstDecimal(dist*sin(graToRad(orientation)/pow(10., precision)));
+double relativeY(double dist, double orientation){
+    return roundFirstDecimal(dist*sin(graToRad(orientation)));
 }
 
-long long absoluteX(long long relativeX, long long stationX){
+double absoluteX(double relativeX, double stationX){
     return relativeX+stationX;
 }
 
-long long absoluteY(long long relativeY, long long stationY){
+double absoluteY(double relativeY, double stationY){
     return relativeY+stationY;
 }
 
-long long height(long long stationHeight, long long distance, long long hv){
+double height(double stationHeight, double distance, double hv){
 
     if(hv>=0){
         long long phi=100*pow(10., precision)-hv;
@@ -169,7 +168,7 @@ long long height(long long stationHeight, long long distance, long long hv){
 
 }
 
-long long repairAngle(long long angle){
+double repairAngle(double angle){
 
     if(angle<0){
         angle+=400;

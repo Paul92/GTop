@@ -93,84 +93,21 @@ char* readStation(FILE *f){
     return station_id;
 }
 
-int atoi(char a){
-    return a-48;
-}
-
-void readNumber(char line[MAX_LINE], int &i, long long &number){
-
-    bool dummy=(i==-1);
-    number=NOT_FOUND;
-
-    int n=strlen(line);
-
-    if(dummy) i=0;
-
-    for(; i<n && isblank(line[i]); i++);
-
-    bool decimalPoint=false;
-
-    if((isblank(line[i-1]) && line[i]=='-' && isdigit(line[i+1])) ||
-       (line[i]=='-' && line[i+1]=='.' && !decimalPoint && isdigit(line[i+2]))){
-        errors=errors | (1<<2);
-        i++;
-    }
-
-    int decimals=0;
-
-    while(!isblank(line[i]) && line[i]!='\0'){
-        if(isdigit(line[i])){
-            if(number==NOT_FOUND)
-                number=0;
-            if(decimals<=precision)
-                number=number*10+atoi(line[i]);
-            decimals+=decimalPoint;
-        }else if(line[i]=='.' && !decimalPoint){
-            decimalPoint=true;
-        }else{
-            errors=errors | 1;
-        }
-        i++;
-    }
-
-    while(decimals<precision && number>0){
-        number*=10;
-        decimals++;
-    }
-
-    if(dummy) i=0;
-}
-
 int readPoint(FILE *f, char point_id[100], 
-              long long &distance, long long &hz, long long &hv){
+              double &distance, double &hz, double &hv){
 
     char line[MAX_LINE];
     int n=getline(f, line);
 
-    int i;
-
-    for(i=0; i<n && isblank(line[i]); i++);
-
-    sscanf(line+i, "%s", point_id);
-    i+=strlen(point_id);
+    sscanf(line, "%s", point_id);
 
     distance=NOT_FOUND;
     hz=NOT_FOUND;
     hv=NOT_FOUND;
 
-    readNumber(line, i, distance);
-    readNumber(line, i, hz);
-    readNumber(line, i, hv);
+    sscanf(line+strlen(point_id), "%lf%lf%lf", &distance, &hz, &hf);
 
-    if(distance==0)
-        errors=errors|(1<<3);
-    if(hz>=400*pow(10., precision) || hv>=400*pow(10., precision))
-        errors=errors|(1<<4);
-
-    for(;i<n; i++){
-        if(!isblank(line[i]))
-            errors=errors|(1<<6);
-    }
+    //TO DO: error checking
 
     if(!strcmp(point_id, "9999") && distance==0 && hz==0)
         return 0;
@@ -178,55 +115,12 @@ int readPoint(FILE *f, char point_id[100],
         return 1;
 }
 
-string itoa(long long nr){
-
-    string a;
-    bool negative=false;
-    if(nr<0){
-        negative=true;
-        nr*=-1;
-    }
-
-    while(nr){
-        a.push_back((nr%10)+48);
-        nr/=10;
-    }
-
-    while(a.size()<precision)
-        a.push_back('0');
-
-    a.insert(precision, ".");
-
-    string b;
-    for(int i=a.size()-1; i>=0; i--)
-        b.push_back(a[i]);
-
-    if(negative)
-        b.insert(0, "-");
-
-    return b;
-
-}
-
-void printNumber(FILE *f, long long number){
-
-    string num=itoa(number);
-
-    fprintf(f, "%s", num.c_str());
-
-}
-
 void printPoint(FILE *f, char point_id[100], 
-                long long absoluteX, long long absoluteY, long long height){
+                double absoluteX, double absoluteY, double height){
 
-    fprintf(f, "%s ", point_id);
-    printNumber(f, absoluteX);
-    fprintf(f, " ");
-    printNumber(f, absoluteY);
+    fprintf(f, "%s %lf %lf", point_id, absoluteX, absoluteY);
     if(height>=0){
-        fprintf(f, " ");
-        printNumber(f, height);
+        fprintf(f, " %lf\n", height);
     }
-    fprintf(f, "\n");
 
 }

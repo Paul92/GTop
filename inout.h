@@ -9,3 +9,5 @@ char* readStation(FILE *f);
 int readPoint(FILE *f, char[100], long long &, long long &, long long&);
 void readNumber(char[MAX_LINE], int&, long long&);
 void printPoint(FILE *f, char[100], long long, long long, long long);
+
+//somebody to replace long long with double

@@ -16,3 +16,5 @@ long long absoluteY(long long, long long);
 long long height(long long, long long, long long);
 
 long long repairAngle(long long);
+
+//somebody to replace all data types with double
