@@ -5,16 +5,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-extern long long errors;
+extern double errors;
 
 struct point{
     char point_id[100];
-    long long nextDist;
-    long long nextHz;
-    long long beforeDist;
-    long long beforeHz;
-    long long beta;
-    long long theta;      //between this point and the next one
+    double nextDist;
+    double nextHz;
+    double beforeDist;
+    double beforeHz;
+    double beta;
+    double theta;      //between this point and the next one
 };
 
 int drumuire(int argc, char **argv){
@@ -28,36 +28,31 @@ int drumuire(int argc, char **argv){
     point points[100];
     int pointsIndex=1;
 
-    int dummyInt=0;
     char dummyChar[100];
     char line[100];
 
-    long long stationX, stationY, orientX, orientY;
+    double stationX, stationY, orientX, orientY;
 
-    cout<<"Coordonata X a statiei de plecare este: ";
+    printf("Coordonata X a statiei de plecare %s este: ", stationX);
     fscanf(stdin, "%s", line);
-    dummyInt=-1;
-    readNumber(line, dummyInt, stationX);
+    stationX=readNumber(line);
 
-    cout<<"Coordonata Y a statiei de plecare este: ";
+    printf("Coordonata Y a statiei de plecare %s este: ", stationY);
     fscanf(stdin, "%s", line);
-    dummyInt=-1;
-    readNumber(line, dummyInt, stationY);
+    stationY=readNumber(line);
 
-    cout<<"Coordonata X a bornei de orientare este: ";
+    printf("Coordonata X a bornei de orientare %s este: ", orientX);
     fscanf(stdin, "%s", line);
-    dummyInt=-1;
-    readNumber(line, dummyInt, orientX);
+    orientX=readNumber(line);
 
-    cout<<"Coordonata Y a bornei de orientare este: ";
+    printf("Coordonata Y a bornei de orientare %s este: ", orientY);
     fscanf(stdin, "%s", line);
-    dummyInt=-1;
-    readNumber(line, dummyInt, orientY);
+    orientY=readNumber(line);
 
     char currentPoint_id[100];
 
     int count=0;
-    long long dummy;
+    double dummy;
 
     point orient;
 
@@ -72,11 +67,11 @@ int drumuire(int argc, char **argv){
     if(count!=2)
         errors=errors|(1<<7);
 
-    long long alpha;
+    double alpha;
     alpha=abs(points[0].nextHz-orient.beforeHz);
     alpha=repairAngle(alpha);
 
-    long long betaSum=0;
+    double betaSum=0;
     
     while(!feof(inputFile)){
         station_id=readStation(inputFile);
@@ -117,9 +112,9 @@ int drumuire(int argc, char **argv){
     points[0].beta=abs(points[0].beforeHz-points[0].nextHz);
     points[0].beta=repairAngle(points[0].beta);
 
-    long long correction=200*(pointsIndex-2)-betaSum;
+    double correction=200*(pointsIndex-2)-betaSum;
 
-    long long th=theta(stationX, stationY, orientX, orientY);
+    double th=theta(stationX, stationY, orientX, orientY);
     points[0].theta=ac+alpha;
 
     for(int i=0; i<pointsIndex; i++){
