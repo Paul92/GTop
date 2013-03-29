@@ -44,16 +44,13 @@
 
 #include "inout.h"
 #include "error.h"
-#include<iostream>
-#include<cstdio>
-#include<cstring>
-#include<cmath>
-#include<cstdlib>
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
 
 #define EOS 0 //End Of Station
 #define precision 4
-
-using namespace std;
 
 extern long long errors;
 
@@ -91,6 +88,15 @@ char* readStation(FILE *f){
     station_id[i]='\0';
 
     return station_id;
+}
+
+double readNumber(char line[MAX_LINE]){
+
+    //check for errors
+    double number;
+    sscanf(line, "%lf", &number);
+    return number;
+
 }
 
 int readPoint(FILE *f, char point_id[100], 

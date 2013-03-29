@@ -1,14 +1,11 @@
 #include "inout.h"
 #include "error.h"
 #include "maths.h"
-#include<cstring>
-#include<iostream>
-#include<cstdlib>
-#include<cstdio>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 extern long long errors;
-
-using namespace std;
 
 struct point{
     char point_id[100];

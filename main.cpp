@@ -1,12 +1,8 @@
 #include "radiere.h"
 #include "drumuire.h"
 
-#include<cstring>
-#include<cstdio>
-
-#include<iostream>
-
-using namespace std;
+#include <string.h>
+#include <stdio.h>
 
 int main(int argc, char **argv){
 
@@ -21,7 +17,7 @@ int main(int argc, char **argv){
     }else if(strcmp(argv[1], "-d")==0){
         return drumuire(0, argv+1);
     }else if(strcmp(argv[1], "-dr")==0){
-        cout<<"both";
+        printf("both");
     }
 
     return 0;

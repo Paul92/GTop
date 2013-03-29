@@ -1,5 +1,5 @@
 #include "error.h"
-#include<cstdio>
+#include <stdio.h>
 
 long long errors=0;
 
