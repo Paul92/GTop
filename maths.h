@@ -1,20 +1,19 @@
-long double degToRad(long long);
-long double graToRad(long long);
-long double radToDeg(long long);
-long double radToGra(long long);
+long double degToRad(double);
+long double graToRad(double);
+long double radToDeg(double);
+long double radToGra(double);
 
-long long theta(long long, long long, long long, long long);
-long long omega(long long, long long);
-long long orientation(long long, long long);
+double theta(double, double, double, double);
+double omega(double, double);
+double orientation(double, double);
 
-long long relativeX(long long, long long);
-long long relativeY(long long, long long);
+double relativeX(double, double);
+double relativeY(double, double);
 
-long long absoluteX(long long, long long);
-long long absoluteY(long long, long long);
+double absoluteX(double, double);
+double absoluteY(double, double);
 
-long long height(long long, long long, long long);
+double height(double, double, double);
 
-long long repairAngle(long long);
+double repairAngle(double);
 
-//somebody to replace all data types with double
