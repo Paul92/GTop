@@ -55,15 +55,12 @@
  *
  */
 
-#include<cmath>
-#include"maths.h"
-#include"error.h"
-#include<iostream>
+#include <math.h>
+#include "include/maths.h"
+#include "include/error.h"
 
 #define PI 3.1415926535897932384626433
 #define precision 4
-
-using namespace std;
 
 double roundFirstDecimal(double x){
 

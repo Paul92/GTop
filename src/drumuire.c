@@ -1,6 +1,6 @@
-#include "inout.h"
-#include "error.h"
-#include "maths.h"
+#include "include/inout.h"
+#include "include/error.h"
+#include "include/maths.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -59,10 +59,10 @@ int drumuire(int argc, char **argv){
     char* station_id;
     station_id=readStation(inputFile);
     strcpy(points[0].point_id, station_id);
-    count+=readPoint(inputFile, currentPoint_id, orient.beforeDist, orient.beforeHz, dummy);
+    count+=readPoint(inputFile, currentPoint_id, &orient.beforeDist, &orient.beforeHz, &dummy);
     strcpy(orient.point_id, currentPoint_id);
-    count+=readPoint(inputFile, currentPoint_id, points[0].nextDist, points[0].nextHz, dummy);
-    count+=readPoint(inputFile, currentPoint_id, dummy, dummy, dummy);
+    count+=readPoint(inputFile, currentPoint_id, &points[0].nextDist, &points[0].nextHz, &dummy);
+    count+=readPoint(inputFile, currentPoint_id, &dummy, &dummy, &dummy);
 
     if(count!=2)
         errors=errors|(1<<7);
@@ -82,12 +82,12 @@ int drumuire(int argc, char **argv){
             if(pointsIndex>0 && strcmp(currentPoint_id, points[pointsIndex].point_id)!=0)
                 errors=errors|(1<<6);
             count+=readPoint(inputFile, currentPoint_id, 
-                      points[pointsIndex].beforeDist, points[pointsIndex].beforeHz, dummy);
+                      &points[pointsIndex].beforeDist, &points[pointsIndex].beforeHz, &dummy);
             
             if(pointsIndex>0 && strcmp(currentPoint_id, points[pointsIndex-1].point_id)!=0)
                 errors=errors|(1<<6);
             count+=readPoint(inputFile, currentPoint_id,
-                      points[pointsIndex].nextDist, points[pointsIndex].nextHz, dummy);
+                      &points[pointsIndex].nextDist, &points[pointsIndex].nextHz, &dummy);
             
             points[pointsIndex].beta=abs(points[pointsIndex].beforeHz-points[pointsIndex].nextHz);
             points[pointsIndex].beta=repairAngle(points[pointsIndex].beta);
@@ -95,7 +95,7 @@ int drumuire(int argc, char **argv){
             betaSum+=points[pointsIndex].beta;
 
             pointsIndex++;
-            count+=readPoint(inputFile, dummyChar, dummy, dummy, dummy);
+            count+=readPoint(inputFile, dummyChar, &dummy, &dummy, &dummy);
             if(count!=2){
                 errors=errors|(1<<7);
             }

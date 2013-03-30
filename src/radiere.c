@@ -1,6 +1,6 @@
-#include "inout.h"
-#include "maths.h"
-#include "error.h"
+#include "include/inout.h"
+#include "include/maths.h"
+#include "include/error.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -43,7 +43,7 @@ int radiere(int argc, char **argv){
 
             printPoint(outputFile, station_id, stationX, stationY, stationHeight);
 
-            readPoint(inputFile, orient_id, orientDist, orientHz, orientHv);
+            readPoint(inputFile, orient_id, &orientDist, &orientHz, &orientHv);
 
 
             printf("Coordonata X a punctului de orientare %s este: ", orient_id);
@@ -66,7 +66,7 @@ int radiere(int argc, char **argv){
 
             double th=theta(stationX, stationY, orientX, orientY);
 
-            while(int ok=readPoint(inputFile, point_id, dist, hz, hv)){
+            while(int ok=readPoint(inputFile, point_id, &dist, &hz, &hv)){
                 if(ok){
                     if(dist==NOT_FOUND || hz==NOT_FOUND){
                         errors=errors | (1<<5);

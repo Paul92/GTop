@@ -1,5 +1,5 @@
-#include "radiere.h"
-#include "drumuire.h"
+#include "include/radiere.h"
+#include "include/drumuire.h"
 
 #include <string.h>
 #include <stdio.h>

@@ -42,8 +42,8 @@
  *  by a whitespace.
 **/
 
-#include "inout.h"
-#include "error.h"
+#include "include/inout.h"
+#include "include/error.h"
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -54,7 +54,7 @@
 
 extern long long errors;
 
-int getline(FILE *f, char line[MAX_LINE]){
+int getLine(FILE *f, char line[MAX_LINE]){
 
     int i=0;
     while(!feof(f)){
@@ -68,23 +68,25 @@ int getline(FILE *f, char line[MAX_LINE]){
     return i;
 }
 
-bool isblank(char a){
-    if(a<=' ')
-        return true;
-    return false;
+int isBlank(char a){
+
+    if(a==' ' || a=='\t')
+        return 1;
+    return 0;
+
 }
 
 char* readStation(FILE *f){
 
     static char station_id[100];
     char temp[100];
-    getline(f, temp);
+    getLine(f, temp);
 
     int i=0;
 
     do{
         station_id[i]=temp[i];
-    }while(temp[++i] && !isblank(temp[i]));
+    }while(temp[++i] && !isBlank(temp[i]));
     station_id[i]='\0';
 
     return station_id;
@@ -100,22 +102,22 @@ double readNumber(char line[MAX_LINE]){
 }
 
 int readPoint(FILE *f, char point_id[100], 
-              double &distance, double &hz, double &hv){
+              double *distance, double *hz, double *hv){
 
     char line[MAX_LINE];
-    int n=getline(f, line);
+    int n=getLine(f, line);
 
     sscanf(line, "%s", point_id);
 
-    distance=NOT_FOUND;
-    hz=NOT_FOUND;
-    hv=NOT_FOUND;
+    *distance=NOT_FOUND;
+    *hz=NOT_FOUND;
+    *hv=NOT_FOUND;
 
-    sscanf(line+strlen(point_id), "%lf%lf%lf", &distance, &hz, &hf);
+    sscanf(line+strlen(point_id), "%lf%lf%lf", distance, hz, hv);
 
     //TO DO: error checking
 
-    if(!strcmp(point_id, "9999") && distance==0 && hz==0)
+    if(!strcmp(point_id, "9999") && *distance==0 && *hz==0)
         return 0;
     else 
         return 1;

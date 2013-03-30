@@ -1,9 +1,9 @@
-g++ -c inout.cpp -o inout.o && 
-g++ -Wall -c maths.cpp -o maths.o &&
-g++ -Wall -c error.cpp -o error.o &&
-g++ -Wall -c radiere.cpp -o radiere.o &&
-g++ -Wall -c drumuire.cpp -o drumuire.o &&
-g++ -Wall -c main.cpp -o main.o &&
-g++ -Wall inout.o maths.o error.o radiere.o drumuire.o main.o -o topo &&
+gcc -Wall -c src/inout.c -o inout.o && 
+gcc -Wall -c src/maths.c -o maths.o &&
+gcc -Wall -c src/error.c -o error.o &&
+gcc -Wall -c src/radiere.c -o radiere.o &&
+gcc -Wall -c src/drumuire.c -o drumuire.o &&
+gcc -Wall -c src/main.c -o main.o &&
+gcc -Wall inout.o maths.o error.o radiere.o drumuire.o main.o -o topo &&
 echo Execution starts &&
 ./topo -d drumuire.in ex.out

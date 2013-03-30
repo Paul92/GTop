@@ -14,5 +14,3 @@
 
 #define ERROR_NUMBER 10
 
-bool checkErrors();
-void clearErrorBuff();
