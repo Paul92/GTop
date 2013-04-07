@@ -25,27 +25,28 @@ int drumuire(int argc, char **argv){
     FILE *inputFile=fopen(inputFileName, "r");
     FILE *outputFile=fopen(outputFileName, "w");
 
-    point points[100];
+    struct point points[100];
     int pointsIndex=1;
 
     char dummyChar[100];
     char line[100];
+    int errors=0;
 
     double stationX, stationY, orientX, orientY;
 
-    printf("Coordonata X a statiei de plecare %s este: ", stationX);
+    printf("Coordonata X a statiei de plecare %lf este: ", stationX);
     fscanf(stdin, "%s", line);
     stationX=readNumber(line);
 
-    printf("Coordonata Y a statiei de plecare %s este: ", stationY);
+    printf("Coordonata Y a statiei de plecare %lf este: ", stationY);
     fscanf(stdin, "%s", line);
     stationY=readNumber(line);
 
-    printf("Coordonata X a bornei de orientare %s este: ", orientX);
+    printf("Coordonata X a bornei de orientare %lf este: ", orientX);
     fscanf(stdin, "%s", line);
     orientX=readNumber(line);
 
-    printf("Coordonata Y a bornei de orientare %s este: ", orientY);
+    printf("Coordonata Y a bornei de orientare %lf este: ", orientY);
     fscanf(stdin, "%s", line);
     orientY=readNumber(line);
 
@@ -54,7 +55,7 @@ int drumuire(int argc, char **argv){
     int count=0;
     double dummy;
 
-    point orient;
+    struct point orient;
 
     char* station_id;
     station_id=readStation(inputFile);
@@ -65,7 +66,7 @@ int drumuire(int argc, char **argv){
     count+=readPoint(inputFile, currentPoint_id, &dummy, &dummy, &dummy);
 
     if(count!=2)
-        errors=errors|(1<<7);
+        errors++;
 
     double alpha;
     alpha=abs(points[0].nextHz-orient.beforeHz);
@@ -80,12 +81,12 @@ int drumuire(int argc, char **argv){
             count=0;
 
             if(pointsIndex>0 && strcmp(currentPoint_id, points[pointsIndex].point_id)!=0)
-                errors=errors|(1<<6);
+                errors++;
             count+=readPoint(inputFile, currentPoint_id, 
                       &points[pointsIndex].beforeDist, &points[pointsIndex].beforeHz, &dummy);
             
             if(pointsIndex>0 && strcmp(currentPoint_id, points[pointsIndex-1].point_id)!=0)
-                errors=errors|(1<<6);
+                errors++;
             count+=readPoint(inputFile, currentPoint_id,
                       &points[pointsIndex].nextDist, &points[pointsIndex].nextHz, &dummy);
             
@@ -97,14 +98,11 @@ int drumuire(int argc, char **argv){
             pointsIndex++;
             count+=readPoint(inputFile, dummyChar, &dummy, &dummy, &dummy);
             if(count!=2){
-                errors=errors|(1<<7);
+                errors++;
             }
         }
     }
 
-    for(int i=0; i<pointsIndex; i++){
-            cout<<points[i].point_id<<' '<<points[i].beta<<'\n';
-    }
 
 
 /*    points[0].beforeDist=points[pointsIndex-1].nextDist;

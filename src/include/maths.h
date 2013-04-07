@@ -1,7 +1,7 @@
-long double degToRad(double);
-long double graToRad(double);
-long double radToDeg(double);
-long double radToGra(double);
+double degToRad(double);
+double graToRad(double);
+double radToDeg(double);
+double radToGra(double);
 
 double theta(double, double, double, double);
 double omega(double, double);

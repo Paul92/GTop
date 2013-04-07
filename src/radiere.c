@@ -5,8 +5,6 @@
 #include <string.h>
 #include <stdio.h>
 
-extern long long errors;
-
 int radiere(int argc, char **argv){
 
     char* inputFileName=argv[1];
@@ -22,6 +20,8 @@ int radiere(int argc, char **argv){
     double stationX, stationY, stationHeight;
     double orientX, orientY, orientHz, orientDist, orientHv;
     char orient_id[100];
+
+    int errors=0;
 
     while(!feof(inputFile)){
         char* station_id=readStation(inputFile);
@@ -58,31 +58,31 @@ int radiere(int argc, char **argv){
             fprintf(outputFile, "\n");
 
             if(orientDist==NOT_FOUND || orientHz==NOT_FOUND){
-                errors=errors | (1<<5);
+                errors++;
             }
            
-            if(!checkErrors())
+            if(!errors)
                 printf("%s\n", orient_id);
+
+            errors=0;
 
             double th=theta(stationX, stationY, orientX, orientY);
 
-            while(int ok=readPoint(inputFile, point_id, &dist, &hz, &hv)){
-                if(ok){
-                    if(dist==NOT_FOUND || hz==NOT_FOUND){
-                        errors=errors | (1<<5);
-                    }
-                    double orien=orientation(th, omega(orientHz, hz));
-                    double pointX=absoluteX(relativeX(dist, orien), stationX);
-                    double pointY=absoluteY(relativeY(dist, orien), stationY);
-
-                    double pointHeight=height(stationHeight, dist, hv);
-
-                    if(checkErrors()){
-                        printPoint(outputFile, point_id, pointX, pointY, pointHeight);
-                    }else
-                        printf("%s\n", point_id);
-                    clearErrorBuff();
+            while(readPoint(inputFile, point_id, &dist, &hz, &hv)){
+                if(dist==NOT_FOUND || hz==NOT_FOUND){
+                    errors++;
                 }
+                double orien=orientation(th, omega(orientHz, hz));
+                double pointX=absoluteX(relativeX(dist, orien), stationX);
+                double pointY=absoluteY(relativeY(dist, orien), stationY);
+
+                double pointHeight=height(stationHeight, dist, hv);
+
+                if(!errors){
+                    printPoint(outputFile, point_id, pointX, pointY, pointHeight);
+                }else
+                    printf("%s\n", point_id);
+                errors=0;
             }
         }
     }

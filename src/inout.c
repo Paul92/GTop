@@ -42,7 +42,7 @@
  *  by a whitespace.
 **/
 
-#include "include/inout.h"
+#include "./include/inout.h"
 #include "include/error.h"
 #include <stdio.h>
 #include <string.h>
@@ -51,8 +51,6 @@
 
 #define EOS 0 //End Of Station
 #define precision 4
-
-extern long long errors;
 
 int getLine(FILE *f, char line[MAX_LINE]){
 
@@ -105,7 +103,7 @@ int readPoint(FILE *f, char point_id[100],
               double *distance, double *hz, double *hv){
 
     char line[MAX_LINE];
-    int n=getLine(f, line);
+    getLine(f, line);
 
     sscanf(line, "%s", point_id);
 

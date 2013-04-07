@@ -138,8 +138,8 @@ double orientation(double theta, double omega){
 	return orientation;  
 }
 
-double relativeX(double dist, double orientation){	
-    return roundFirstDecimal(dist*cos(graToRad(orientation));
+double relativeX(double dist, double orientation){
+    return roundFirstDecimal(dist*cos(graToRad(orientation)));
 }
 
 double relativeY(double dist, double orientation){
