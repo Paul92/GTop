@@ -105,13 +105,11 @@ int readPoint(FILE *f, char point_id[100],
     char line[MAX_LINE];
     getLine(f, line);
 
-    sscanf(line, "%s", point_id);
-
     *distance=NOT_FOUND;
     *hz=NOT_FOUND;
     *hv=NOT_FOUND;
 
-    sscanf(line+strlen(point_id), "%lf%lf%lf", distance, hz, hv);
+    sscanf(line, "%s %lf %lf %lf", distance, hz, hv);
 
     //TO DO: error checking
 

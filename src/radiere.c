@@ -60,14 +60,13 @@ int radiere(int argc, char **argv){
             if(orientDist==NOT_FOUND || orientHz==NOT_FOUND){
                 errors++;
             }
-           
+
             if(!errors)
                 printf("%s\n", orient_id);
 
             errors=0;
 
             double th=theta(stationX, stationY, orientX, orientY);
-
             while(readPoint(inputFile, point_id, &dist, &hz, &hv)){
                 if(dist==NOT_FOUND || hz==NOT_FOUND){
                     errors++;
@@ -77,7 +76,7 @@ int radiere(int argc, char **argv){
                 double pointY=absoluteY(relativeY(dist, orien), stationY);
 
                 double pointHeight=height(stationHeight, dist, hv);
-
+printf("%s %lf %lf %lf %lf %lf %lf %lf %lf\n", point_id, orien, orientHz, hz, omega(orientHz, hz), relativeX(dist, orien), pointX, relativeY(dist, orien), pointY);
                 if(!errors){
                     printPoint(outputFile, point_id, pointX, pointY, pointHeight);
                 }else

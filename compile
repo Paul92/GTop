@@ -6,4 +6,4 @@ gcc -Wall -c -lm src/drumuire.c -o drumuire.o &&
 gcc -Wall -c -lm src/main.c -o main.o &&
 gcc -Wall -lm inout.o maths.o error.o radiere.o drumuire.o main.o -o topo &&
 echo Execution starts &&
-./topo -r drumuire.in ex.out
+./topo -r testing/ex.in testing/ex.out

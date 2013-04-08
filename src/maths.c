@@ -111,7 +111,6 @@ double theta(double stationX, double stationY,
 
     if(alpha<0)
         alpha*=(-1);
-
     if(top>=0 && bot>0){
         theta=alpha;
     }else if(top<0 && bot>0){
