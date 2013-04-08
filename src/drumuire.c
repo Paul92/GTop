@@ -19,7 +19,7 @@ struct point{
 
 int drumuire(int argc, char **argv){
 
-    char* inputFileName=argv[1];
+/*    char* inputFileName=argv[1];
     char* outputFileName=argv[2];
 
     FILE *inputFile=fopen(inputFileName, "r");

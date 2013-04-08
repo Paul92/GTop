@@ -1,9 +1,9 @@
-gcc -Wall -c src/inout.c -o inout.o && 
-gcc -Wall -c src/maths.c -o maths.o &&
-gcc -Wall -c src/error.c -o error.o &&
-gcc -Wall -c src/radiere.c -o radiere.o &&
-gcc -Wall -c src/drumuire.c -o drumuire.o &&
-gcc -Wall -c src/main.c -o main.o &&
-gcc -Wall inout.o maths.o error.o radiere.o drumuire.o main.o -o topo &&
+gcc -Wall -c -lm src/inout.c -o inout.o && 
+gcc -Wall -c -lm src/maths.c -o maths.o &&
+gcc -Wall -c -lm src/error.c -o error.o &&
+gcc -Wall -c -lm src/radiere.c -o radiere.o &&
+gcc -Wall -c -lm src/drumuire.c -o drumuire.o &&
+gcc -Wall -c -lm src/main.c -o main.o &&
+gcc -Wall -lm inout.o maths.o error.o radiere.o drumuire.o main.o -o topo &&
 echo Execution starts &&
-./topo -d drumuire.in ex.out
+./topo -r drumuire.in ex.out
