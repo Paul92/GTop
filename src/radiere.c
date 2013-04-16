@@ -76,7 +76,6 @@ int radiere(int argc, char **argv){
                 double pointY=absoluteY(relativeY(dist, orien), stationY);
 
                 double pointHeight=height(stationHeight, dist, hv);
-printf("%s %lf %lf %lf %lf %lf %lf %lf %lf\n", point_id, orien, orientHz, hz, omega(orientHz, hz), relativeX(dist, orien), pointX, relativeY(dist, orien), pointY);
                 if(!errors){
                     printPoint(outputFile, point_id, pointX, pointY, pointHeight);
                 }else
@@ -91,3 +90,4 @@ printf("%s %lf %lf %lf %lf %lf %lf %lf %lf\n", point_id, orien, orientHz, hz, om
     return 0;
     
 }
+
