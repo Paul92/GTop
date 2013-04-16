@@ -8,7 +8,7 @@
 extern double errors;
 
 struct point{
-    char point_id[100];
+    char *point_id;
     double nextDist;
     double nextHz;
     double beforeHz;
@@ -70,17 +70,17 @@ int drumuire(int argc, char **argv){
     orientY=readNumber(line);
 
     char orient_id[100];
-    double orientHz;
+    double orientHz, orientDist;
 
-    readPoint(inputFile, orient_id, orientHz);
+    readPoint(inputFile, orient_id, &orientDist, &orientHz, NULL);
 
     struct point *firstPoint=(struct point*)malloc(sizeof(struct point));
 
     readPoint(inputFile, firstPoint->point_id, &firstPoint->beforeDist, 
-              &firstPoint->nextHz);
+              &firstPoint->nextHz, NULL);
 // hv is optional argument
 
-    readPoint(inputFile);
+    readPoint(inputFile, NULL, NULL, NULL, NULL);
 //actually make all argument optional. I don't like dummys. This is for the
 //first stop
 
@@ -98,19 +98,19 @@ int drumuire(int argc, char **argv){
         struct point *newPoint=(struct point*)malloc(sizeof(struct point));
         newPoint->point_id=readStation(inputFile);
         if(!feof(inputFile)){
-            
+
             readPoint(inputFile, beforeCurrent_id, &newPoint->beforeDist, 
-                      &newPoint->beforeHz);
-            
+                      &newPoint->beforeHz, NULL);
+
             readPoint(inputFile, afterCurrent_id, &newPoint->nextDist,
-                      &newPoint->nextHz);
-            
+                      &newPoint->nextHz, NULL);
+
             newPoint->beta=abs(newPoint->beforeHz-newPoint->nextHz);
             newPoint->beta=repairAngle(newPoint->beta);
 
             betaSum+=newPoint->beta;
 
-            count+=readPoint(inputFile);    //check for stop
+            readPoint(inputFile, NULL, NULL, NULL, NULL);    //check for stop
                                             //and for other damn errors
             addElement(points, newPoint);
         }
