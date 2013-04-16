@@ -64,9 +64,9 @@
 
 double roundFirstDecimal(double x){
 
-    long long p=x*10;
+    long long p=x*pow(10, precision+1);
     if(p%10>=5){
-        x++;
+        x=(x*pow(10, precision)+1)/pow(10, precision);
     }
 
     return x;
