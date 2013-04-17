@@ -4,6 +4,7 @@ gcc -Wall -c -lm src/error.c -o error.o &&
 gcc -Wall -c -lm src/radiere.c -o radiere.o &&
 gcc -Wall -c -lm src/drumuire.c -o drumuire.o &&
 gcc -Wall -c -lm src/main.c -o main.o &&
-gcc -Wall -lm inout.o maths.o error.o radiere.o drumuire.o main.o -o topo &&
+gcc -Wall -c -lm src/list.c -o list.o &&
+gcc -Wall -lm inout.o maths.o error.o radiere.o drumuire.o list.o main.o -o topo &&
 echo Execution starts &&
-./topo -r testing/ex.in testing/ex.out
+./topo -d testing/ex.in testing/ex.out
