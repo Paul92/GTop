@@ -33,6 +33,15 @@ void addElement(struct point *node, struct point *data){
     data->before=node;
 }
 
+void printList(struct point *node, struct point *curr){
+
+    printf("%d\n", curr->beta);
+    if(curr->next && curr->next!=node){
+        printList(node, curr->next);
+    }
+
+}
+
 int drumuire(int argc, char **argv){
 
     char* inputFileName=argv[1];
@@ -78,7 +87,6 @@ int drumuire(int argc, char **argv){
 
     readPoint(inputFile, firstPoint->point_id, &firstPoint->beforeDist, 
               &firstPoint->nextHz, NULL);
-// hv is optional argument
 
     readPoint(inputFile, NULL, NULL, NULL, NULL);
 //actually make all argument optional. I don't like dummys. This is for the
@@ -116,6 +124,7 @@ int drumuire(int argc, char **argv){
         }
     }
 
+    printList(points, points);
 
     return 0;
 
