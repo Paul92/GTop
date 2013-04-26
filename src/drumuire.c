@@ -1,46 +1,10 @@
 #include "include/inout.h"
 #include "include/error.h"
 #include "include/maths.h"
+#include "include/list.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-extern double errors;
-
-struct point{
-    char *point_id;
-    double nextDist;
-    double nextHz;
-    double beforeHz;
-    double beforeDist;
-    double beta;
-    double theta;      //between this point and the next one
-    struct point* next;
-    struct point* before;
-};
-
-void nodeInit(struct point *node){
-    node->next=NULL;
-    node->before=NULL;
-}
-
-void addElement(struct point *node, struct point *data){
-    
-    while(node->next!=NULL){
-        addElement(node->next, data);
-    }
-    node->next=data;
-    data->before=node;
-}
-
-void printList(struct point *node, struct point *curr){
-
-    printf("%d\n", curr->beta);
-    if(curr->next && curr->next!=node){
-        printList(node, curr->next);
-    }
-
-}
 
 int drumuire(int argc, char **argv){
 
@@ -99,12 +63,16 @@ int drumuire(int argc, char **argv){
     alpha=repairAngle(alpha);
 
     double betaSum=0;
+    int noOfPoints=0; //so in input file should be n+1 points
+                      //station twice
 
     char beforeCurrent_id[100], afterCurrent_id[100]; //used for error check
-
+    
     while(!feof(inputFile)){
+        printf("DF");
         struct point *newPoint=(struct point*)malloc(sizeof(struct point));
-        newPoint->point_id=readStation(inputFile);
+        //newPoint->point_id=readStation(inputFile);
+        strcpy(newPoint->point_id, readStation(inputFile));
         if(!feof(inputFile)){
 
             readPoint(inputFile, beforeCurrent_id, &newPoint->beforeDist, 
@@ -120,11 +88,20 @@ int drumuire(int argc, char **argv){
 
             readPoint(inputFile, NULL, NULL, NULL, NULL);    //check for stop
                                             //and for other damn errors
-            addElement(points, newPoint);
+            addPoint(points, newPoint);
+            noOfPoints++;
         }
     }
 
-    printList(points, points);
+    double epsBeta = betaSum - 200*(noOfPoints-2);
+    double CTbeta = -epsBeta;
+    double CUbeta = CTbeta / noOfPoints;   //right?
+
+    correctBeta(points, CUbeta);
+
+    
+    
+ printList(points);
 
     return 0;
 

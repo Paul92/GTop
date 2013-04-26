@@ -6,8 +6,8 @@
 
 void printElement(struct point *node){
     printf("next: %lf %lf before: %lf %lf beta: %lf\n", 
-            node->nextDist, node->nextAngle, 
-            node->beforeDist, node->beforeAngle, node->beta);
+            node->nextDist, node->nextHz, 
+            node->beforeDist, node->beforeHz, node->beta);
 }
 
 void printList(struct point *node){
@@ -26,9 +26,9 @@ struct point *newPoint(double nextAngle, double nextDist,
 
     struct point *new = (struct point *)malloc(sizeof(struct point));
     
-    new->nextAngle = nextAngle;
+    new->nextHz = nextAngle;
     new->nextDist = nextDist;
-    new->beforeAngle = beforeAngle;
+    new->beforeHz = beforeAngle;
     new->beforeDist = beforeDist;
     new->beta = beta;
     new->next = NULL;
@@ -49,6 +49,14 @@ void applyFunc(struct point *node, void (*func)(struct point *pt)){
     (*func)(node);
     if(node->next!=NULL){
         applyFunc(node->next, func);
+    }
+}
+
+void correctBeta(struct point *node, double val){
+
+    node->beta += val;
+    if(node->next!=NULL){
+        correctBeta(node->next, val);
     }
 }
 

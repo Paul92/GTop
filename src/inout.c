@@ -116,15 +116,16 @@ int readPoint(FILE *f, char point_id[100],
         }
 
         sscanf(line, "%s %lf %lf %lf", point_id, distance, hz, hv);
-    }
 
     //TO DO: error checking
 
-    if(!strcmp(point_id, "9999") && *distance==0 && *hz==0)
-        return 0;
-    else 
-        return 1;
+        if(!strcmp(point_id, "9999") && *distance==0 && *hz==0)
+            return 0;
+        else 
+            return 1;
+    }
 }
+
 
 void printPoint(FILE *f, char point_id[100], 
                 double absoluteX, double absoluteY, double height){
