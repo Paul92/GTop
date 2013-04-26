@@ -49,19 +49,24 @@ int drumuire(int argc, char **argv){
 
     struct point *firstPoint=(struct point*)malloc(sizeof(struct point));
 
-    readPoint(inputFile, firstPoint->point_id, &firstPoint->beforeDist, 
+    readPoint(inputFile, firstPoint->point_id, &firstPoint->nextDist, 
               &firstPoint->nextHz, NULL);
 
+    points = firstPoint;
+
     readPoint(inputFile, NULL, NULL, NULL, NULL);
+    fscanf(inputFile, "%s", line);
 //actually make all argument optional. I don't like dummys. This is for the
 //first stop
 
 //here goes some error checking, based on return value of readPoint
 
-    double alpha;
-    alpha=abs(points->nextHz-orientHz);
-    alpha=repairAngle(alpha);
+printElement(points);
 
+    double alpha;
+    alpha=(points->nextHz-orientHz);
+    alpha=repairAngle(alpha);
+    
     double betaSum=0;
     int noOfPoints=0; //so in input file should be n+1 points
                       //station twice
@@ -70,7 +75,6 @@ int drumuire(int argc, char **argv){
     
     while(!feof(inputFile)){
         struct point *newPoint=(struct point*)malloc(sizeof(struct point));
-        //newPoint->point_id=readStation(inputFile);
         strcpy(newPoint->point_id, readStation(inputFile));
         if(!feof(inputFile)){
 
@@ -80,8 +84,6 @@ int drumuire(int argc, char **argv){
             readPoint(inputFile, afterCurrent_id, &newPoint->nextDist,
                       &newPoint->nextHz, NULL);
 
-            printf("%llf %llf \n", newPoint->nextDist, newPoint->nextHz);
-
             newPoint->beta=abs(newPoint->beforeHz-newPoint->nextHz);
             newPoint->beta=repairAngle(newPoint->beta);
 
@@ -89,6 +91,8 @@ int drumuire(int argc, char **argv){
 
             readPoint(inputFile, NULL, NULL, NULL, NULL);    //check for stop
                                             //and for other damn errors
+
+            fscanf(inputFile, "%s", line);  //skip newline
             addPoint(points, newPoint);
             noOfPoints++;
         }
