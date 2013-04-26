@@ -84,7 +84,10 @@ printElement(points);
             readPoint(inputFile, afterCurrent_id, &newPoint->nextDist,
                       &newPoint->nextHz, NULL);
 
-            newPoint->beta=abs(newPoint->beforeHz-newPoint->nextHz);
+            printf("%lf %lf %lf\n", newPoint->beforeHz, newPoint->nextHz, 
+                    newPoint->beforeHz-newPoint->nextHz);
+
+            newPoint->beta=(newPoint->beforeHz-newPoint->nextHz);
             newPoint->beta=repairAngle(newPoint->beta);
 
             betaSum+=newPoint->beta;
@@ -98,10 +101,12 @@ printElement(points);
         }
     }
 
+    betaSum-=alpha;
     double epsBeta = betaSum - 200*(noOfPoints-2);
     double CTbeta = -epsBeta;
     double CUbeta = CTbeta / noOfPoints;   //right?
 
+    subtractAlpha(points, alpha);
     correctBeta(points, CUbeta);
 
     

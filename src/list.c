@@ -61,3 +61,10 @@ void correctBeta(struct point *node, double val){
     }
 }
 
+void subtractAlpha(struct point *node, double alpha){
+    if(node->next!=NULL){
+        subtractAlpha(node->next, alpha);
+    }else{
+        node->beta-=alpha;
+    }
+}
