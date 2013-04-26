@@ -69,7 +69,6 @@ int drumuire(int argc, char **argv){
     char beforeCurrent_id[100], afterCurrent_id[100]; //used for error check
     
     while(!feof(inputFile)){
-        printf("DF");
         struct point *newPoint=(struct point*)malloc(sizeof(struct point));
         //newPoint->point_id=readStation(inputFile);
         strcpy(newPoint->point_id, readStation(inputFile));
@@ -80,6 +79,8 @@ int drumuire(int argc, char **argv){
 
             readPoint(inputFile, afterCurrent_id, &newPoint->nextDist,
                       &newPoint->nextHz, NULL);
+
+            printf("%llf %llf \n", newPoint->nextDist, newPoint->nextHz);
 
             newPoint->beta=abs(newPoint->beforeHz-newPoint->nextHz);
             newPoint->beta=repairAngle(newPoint->beta);

@@ -12,6 +12,7 @@ void printElement(struct point *node){
 
 void printList(struct point *node){
     printElement(node);
+    printf("%d\n", (node->next!=NULL));
     if(node->next!=NULL){
         printList(node->next);
     }else{
@@ -40,7 +41,7 @@ void addPoint(struct point *curr, struct point *pt){
     if(curr->next == NULL){
         curr->next = pt;
     }else{
-        addPoint(pt, curr->next);
+        addPoint(curr->next, pt);
     }
 }
 
