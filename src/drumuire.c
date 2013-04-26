@@ -63,9 +63,9 @@ int drumuire(int argc, char **argv){
 
 printElement(points);
 
-    double alpha;
-    alpha=(points->nextHz-orientHz);
-    alpha=repairAngle(alpha);
+    double gamma;
+    gamma=(points->nextHz-orientHz);
+    gamma=repairAngle(gamma);
     
     double betaSum=0;
     int noOfPoints=0; //so in input file should be n+1 points
@@ -101,12 +101,20 @@ printElement(points);
         }
     }
 
-    betaSum-=alpha;
+    betaSum-=gamma;
     double epsBeta = betaSum - 200*(noOfPoints-2);
+
+    printf("Pe unghiurile interioare ai avut o eroare de %lf grade\n", epsBeta);
+    printf("Vrei sa continui? (y/n) ");
+    char accept;
+    scanf("%c", &accept);
+    
+    // if accept != 'y' assert it
+
     double CTbeta = -epsBeta;
     double CUbeta = CTbeta / noOfPoints;   //right?
 
-    subtractAlpha(points, alpha);
+    subtractAlpha(points, gamma);
     correctBeta(points, CUbeta);
 
     
