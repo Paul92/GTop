@@ -58,18 +58,20 @@
 #include <math.h>
 #include "include/maths.h"
 #include "include/error.h"
+#include <stdio.h>
 
 #define PI 3.1415926535897932384626433
 #define precision 4
 
 double roundFirstDecimal(double x){
 
+//    printf("%lf\n", x);
     long long p=x*pow(10, precision+1);
-    if(p%10>=5){
-        x=(x*pow(10, precision)+1)/pow(10, precision);
+    if(p%10>=5){ 
+        x=(x*pow(10, precision)+1);///pow(10, precision);
     }
 
-    return x;
+    return ((int)(x))/pow(10, precision);
 }
 
 double degToRad(double x){

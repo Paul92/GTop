@@ -17,3 +17,4 @@ double height(double, double, double);
 
 double repairAngle(double);
 
+double roundFirstDecimal(double);
