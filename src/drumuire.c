@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int drumuire(int argc, char **argv){
 
@@ -61,11 +62,9 @@ int drumuire(int argc, char **argv){
 
 //here goes some error checking, based on return value of readPoint
 
-printElement(points);
-
-    double gamma;
-    gamma=(points->nextHz-orientHz);
-    gamma=repairAngle(gamma);
+    double alpha;
+    alpha=(points->nextHz-orientHz);
+    alpha=repairAngle(alpha);
     
     double betaSum=0;
     int noOfPoints=0; //so in input file should be n+1 points
@@ -84,9 +83,6 @@ printElement(points);
             readPoint(inputFile, afterCurrent_id, &newPoint->nextDist,
                       &newPoint->nextHz, NULL);
 
-            printf("%lf %lf %lf\n", newPoint->beforeHz, newPoint->nextHz, 
-                    newPoint->beforeHz-newPoint->nextHz);
-
             newPoint->beta=(newPoint->beforeHz-newPoint->nextHz);
             newPoint->beta=repairAngle(newPoint->beta);
 
@@ -101,26 +97,32 @@ printElement(points);
         }
     }
 
-    betaSum-=gamma;
+    betaSum-=alpha;
     double epsBeta = betaSum - 200*(noOfPoints-2);
 
     printf("Pe unghiurile interioare ai avut o eroare de %lf grade\n", epsBeta);
     printf("Vrei sa continui? (y/n) ");
     char accept;
-    scanf("%c", &accept);
     
-    // if accept != 'y' assert it
+    fscanf(stdin, " %c", &accept);
+    if(!(accept=='y' || accept=='Y')){
+        printf("Ai ales sa nu continui.\n");
+        exit(EXIT_SUCCESS);
+    }
 
     double CTbeta = -epsBeta;
     double CUbeta = CTbeta / noOfPoints;   //right?
 
-    subtractAlpha(points, gamma);
+    subtractAlpha(points, alpha);
     correctBeta(points, CUbeta);
 
+    double th = theta(stationX, stationY, orientX, orientY);
+    th = roundFirstDecimal(th);
     
-    
- printList(points);
+    points->theta = th+alpha;
+    computeThetas(points, points->next);
 
+    printList(points);
     return 0;
 
 }
