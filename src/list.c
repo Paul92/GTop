@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "include/list.h"
+#include "include/maths.h"
 
 //testing functions
 
 void printElement(struct point *node){
-    printf("next: %lf %lf before: %lf %lf beta: %lf\n", 
+    printf("next: %lf %lf before: %lf %lf beta: %lf theta: %lf\n", 
             node->nextDist, node->nextHz, 
-            node->beforeDist, node->beforeHz, node->beta);
+            node->beforeDist, node->beforeHz, node->beta, node->theta);
 }
 
 void printList(struct point *node){
@@ -68,3 +69,12 @@ void subtractAlpha(struct point *node, double alpha){
         node->beta-=alpha;
     }
 }
+
+void computeThetas(struct point *node, struct point* curr){
+//    printf("%lf %lf %lf\n", curr->theta, curr->beta, node->beta);
+    curr->theta=roundFirstDecimal(node->theta+(200-curr->beta));
+    if(curr->next != NULL){
+        computeThetas(curr, curr->next);
+    }
+}
+

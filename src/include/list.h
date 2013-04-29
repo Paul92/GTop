@@ -5,6 +5,7 @@ struct point{
     double beforeHz;
     double beforeDist;
     double beta;
+    double theta;
     struct point *next;
 };
 
@@ -15,3 +16,4 @@ void printList(struct point *);
 void correctBeta(struct point *, double);
 void printElement(struct point*);
 void subtractAlpha(struct point *, double alpha);
+void computeThetas(struct point *, struct point *);
