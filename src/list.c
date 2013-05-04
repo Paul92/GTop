@@ -7,9 +7,11 @@
 //testing functions
 
 void printElement(struct point *node){
-    printf("next: %lf %lf before: %lf %lf beta: %lf theta: %lf\n", 
+    printf("next: %lf %lf before: %lf %lf beta: %lf theta: %lf\n
+            relatives: %lf %lf absolutes: %lf %lf", 
             node->nextDist, node->nextHz, 
-            node->beforeDist, node->beforeHz, node->beta, node->theta);
+            node->beforeDist, node->beforeHz, node->beta, node->theta, 
+            node->relativeX, node->relativeY, node->absoluteX, node->absoluteY);
 }
 
 void printList(struct point *node){
