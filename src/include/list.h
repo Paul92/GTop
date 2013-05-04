@@ -6,14 +6,22 @@ struct point{
     double beforeDist;
     double beta;
     double theta;
+    double relativeX;
+    double relativeY;
+    double absoluteX;
+    double absoluteY;
     struct point *next;
 };
 
-struct point *newPoint(double, double, double, double, double);
+struct point *newPoint(double, double, double, double, double); //BC. Correct 
 void addPoint(struct point *, struct point *);
 void applyFunc(struct point *, void (*)(struct point *pt));
 void printList(struct point *);
-void correctBeta(struct point *, double);
+void correctBeta(struct point *, double);  //these are too specialised for 
+                                           //a list. Do something, or call it
+                                           //otherwise
 void printElement(struct point*);
 void subtractAlpha(struct point *, double alpha);
 void computeThetas(struct point *, struct point *);
+void computeRelatives(struct point *, double *, double *);
+

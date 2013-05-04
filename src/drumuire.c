@@ -122,7 +122,13 @@ int drumuire(int argc, char **argv){
     points->theta = th+alpha;
     computeThetas(points, points->next);
 
+    double sumX=0, sumY=0;
+    computeRelatives(points, &sumX, &sumY); //WHO THE HELL IT THETA?
+                                            //maybe I should start from
+                                            //points->next?
+    
     printList(points);
+
     return 0;
 
 }

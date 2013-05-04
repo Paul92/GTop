@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "include/list.h"
 #include "include/maths.h"
 
@@ -78,3 +79,14 @@ void computeThetas(struct point *node, struct point* curr){
     }
 }
 
+void computeRelatives(struct point *node, double *sumX, double *sumY){
+    node->relativeX=node->beforeDist*cos(graToRad(node->theta)); //okay, i have no
+                                                         //idea if this is
+                                                         //right
+    node->relativeY=node->beforeDist*sin(graToRad(node->theta));
+    *sumX += node->relativeX;
+    *sumY += node->relativeY;
+    if(node->next!=NULL){
+        computeRelatives(node->next, sumX, sumY);
+    }
+}
