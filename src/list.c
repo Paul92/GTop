@@ -83,7 +83,7 @@ void computeRelatives(struct point *node, double *sumX, double *sumY){
     node->relativeX=node->beforeDist*cos(graToRad(node->theta)); //okay, i have no
                                                          //idea if this is
                                                          //right
-    node->relativeY=node->beforeDist*sin(graToRad(node->theta));
+    node->relativeY=node->nextDist*sin(graToRad(node->theta));
     *sumX += node->relativeX;
     *sumY += node->relativeY;
     if(node->next!=NULL){
@@ -92,8 +92,8 @@ void computeRelatives(struct point *node, double *sumX, double *sumY){
 }
 
 void correctRelatives(struct point* node, double CTx, double CTy){
-    node->relativeX+=CTx;
-    node->relativeY+=CTy;
+    node->relativeX+=CTx*node->nextDist;
+    node->relativeY+=CTy*node->nextDist;
     if(node->next!=NULL){
         correctRelatives(node->next, CTx, CTy);
     }
