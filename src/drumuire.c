@@ -131,13 +131,14 @@ int drumuire(int argc, char **argv){
                                             //maybe I should start from
                                             //points->next?
     
-    CTx = -sumX/distSum;
-    CTy = -sumY/distSum;
+    double CTx = -sumX/distSum;
+    double CTy = -sumY/distSum;
 
     correctRelatives(points, CTx, CTy);
 
     computeAbsolutes(points, stationX, stationY);
 
+    printf("DistSum:\n", distSum);
     printList(points);
 
     return 0;
