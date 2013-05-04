@@ -72,6 +72,8 @@ int drumuire(int argc, char **argv){
 
     char beforeCurrent_id[100], afterCurrent_id[100]; //used for error check
     
+    double distSum=0;
+
     while(!feof(inputFile)){
         struct point *newPoint=(struct point*)malloc(sizeof(struct point));
         strcpy(newPoint->point_id, readStation(inputFile));
@@ -82,6 +84,8 @@ int drumuire(int argc, char **argv){
 
             readPoint(inputFile, afterCurrent_id, &newPoint->nextDist,
                       &newPoint->nextHz, NULL);
+
+            distSum += newPoint->nextDist;
 
             newPoint->beta=(newPoint->beforeHz-newPoint->nextHz);
             newPoint->beta=repairAngle(newPoint->beta);
@@ -127,6 +131,12 @@ int drumuire(int argc, char **argv){
                                             //maybe I should start from
                                             //points->next?
     
+    CTx = -sumX/distSum;
+    CTy = -sumY/distSum;
+
+    correctRelatives(points, CTx, CTy);
+
+
     printList(points);
 
     return 0;

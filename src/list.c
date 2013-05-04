@@ -90,3 +90,11 @@ void computeRelatives(struct point *node, double *sumX, double *sumY){
         computeRelatives(node->next, sumX, sumY);
     }
 }
+
+void correctRelatives(struct point* node, double CTx, double CTy){
+    node->relativeX+=CTx;
+    node->relativeY+=CTy;
+    if(node->next!=NULL){
+        correctRelatives(node->next, CTx, CTy);
+    }
+}

@@ -24,4 +24,4 @@ void printElement(struct point*);
 void subtractAlpha(struct point *, double alpha);
 void computeThetas(struct point *, struct point *);
 void computeRelatives(struct point *, double *, double *);
-
+void correctRelatives(struct point *, double, double);
