@@ -3,6 +3,7 @@
 #include <math.h>
 #include "include/list.h"
 #include "include/maths.h"
+#include "include/inout.h"
 
 //testing functions
 
@@ -13,11 +14,11 @@ void printElement(struct point *node){
             node->relativeX, node->relativeY, node->absoluteX, node->absoluteY);
 }
 
-void printList(struct point *node){
+void echoList(struct point *node){
     printElement(node);
     printf("%d\n", (node->next!=NULL));
     if(node->next!=NULL){
-        printList(node->next);
+        echoList(node->next);
     }else{
         printf("END");
     }
@@ -73,8 +74,7 @@ void subtractAlpha(struct point *node, double alpha){
 }
 
 void computeThetas(struct point *node, struct point* curr){
-//    printf("%lf %lf %lf\n", curr->theta, curr->beta, node->beta);
-    curr->theta=(node->theta+(200-curr->beta));
+    curr->theta=roundFirstDecimal(node->theta+(200-curr->beta));
     if(curr->next != NULL){
         computeThetas(curr, curr->next);
     }
@@ -105,5 +105,12 @@ void computeAbsolutes(struct point *node, double stationX, double stationY){
     node->absoluteY = node->relativeY + stationY;
     if(node->next!=NULL){
         computeAbsolutes(node->next, stationX, stationY);
+    }
+}
+
+void printList(FILE *outputFile, struct point *node){
+    printPoint(outputFile, node->point_id, node->absoluteX, node->absoluteY, -1);
+    if(node->next!=NULL){
+        printList(outputFile, node->next);
     }
 }

@@ -124,11 +124,12 @@ int readPoint(FILE *f, char point_id[100],
         else 
             return 1;
     }
+    return -1; //error flag
 }
 
-
 void printPoint(FILE *f, char point_id[100], 
-                double absoluteX, double absoluteY, double height){
+                double absoluteX, double absoluteY, double height){ //height 
+                                                       //should be optional
 
     fprintf(f, "%s %.4lf %.4lf", point_id, absoluteX, absoluteY);
     if(height>=0){

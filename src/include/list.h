@@ -16,7 +16,7 @@ struct point{
 struct point *newPoint(double, double, double, double, double); //BC. Correct 
 void addPoint(struct point *, struct point *);
 void applyFunc(struct point *, void (*)(struct point *pt));
-void printList(struct point *);
+void printList(FILE*, struct point *);
 void correctBeta(struct point *, double);  //these are too specialised for 
                                            //a list. Do something, or call it
                                            //otherwise

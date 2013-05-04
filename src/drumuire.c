@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 int drumuire(int argc, char **argv){
-    freopen ("testing/myfile.txt","r",stdin); //Radu's testing line
+    //freopen ("testing/myfile.txt","r",stdin); //Radu's testing line
 
     char* inputFileName=argv[1];
     char* outputFileName=argv[2];
@@ -139,8 +139,7 @@ int drumuire(int argc, char **argv){
 
     computeAbsolutes(points, stationX, stationY);
 
-    printf("DistSum:\n", distSum);
-    printList(points);
+    printList(outputFile, points);
 
     return 0;
 
