@@ -136,6 +136,7 @@ int drumuire(int argc, char **argv){
 
     correctRelatives(points, CTx, CTy);
 
+    computeAbsolutes(points, stationX, stationY);
 
     printList(points);
 

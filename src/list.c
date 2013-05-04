@@ -98,3 +98,11 @@ void correctRelatives(struct point* node, double CTx, double CTy){
         correctRelatives(node->next, CTx, CTy);
     }
 }
+
+void computeAbsolutes(struct point *node, double stationX, double stationY){
+    node->absoluteX = node->relativeX + stationX;
+    node->absoluteY = node->relativeY + stationY;
+    if(node->next!=NULL){
+        computeAbsolutes(node->next, stationX, stationY);
+    }
+}
