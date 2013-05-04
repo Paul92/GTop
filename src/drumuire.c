@@ -140,7 +140,7 @@ int drumuire(int argc, char **argv){
     computeAbsolutes(points, stationX, stationY);
 
     printList(outputFile, points);
-
+    echoList(points);
     return 0;
 
 }
