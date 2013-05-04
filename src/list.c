@@ -74,7 +74,7 @@ void subtractAlpha(struct point *node, double alpha){
 
 void computeThetas(struct point *node, struct point* curr){
 //    printf("%lf %lf %lf\n", curr->theta, curr->beta, node->beta);
-    curr->theta=roundFirstDecimal(node->theta+(200-curr->beta));
+    curr->theta=(node->theta+(200-curr->beta));
     if(curr->next != NULL){
         computeThetas(curr, curr->next);
     }
@@ -84,7 +84,7 @@ void computeRelatives(struct point *node, double *sumX, double *sumY){
     node->relativeX=node->beforeDist*cos(graToRad(node->theta)); //okay, i have no
                                                          //idea if this is
                                                          //right
-    node->relativeY=node->nextDist*sin(graToRad(node->theta));
+    node->relativeY=node->beforeDist*sin(graToRad(node->theta));
     *sumX += node->relativeX;
     *sumY += node->relativeY;
     if(node->next!=NULL){

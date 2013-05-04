@@ -69,6 +69,8 @@ double roundFirstDecimal(double x){
     long long p=x*pow(10, precision+1);
     if(p%10>=5){ 
         x=(x*pow(10, precision)+1);///pow(10, precision);
+    }else{
+        x=x*pow(10, precision);
     }
 
     return ((int)(x))/pow(10, precision);
@@ -95,7 +97,7 @@ double theta(double stationX, double stationY,
 
     double top=orientY-stationY;
     double bot=orientX-stationX;
- 
+
     double theta;
 
     if(bot==0){
@@ -110,7 +112,7 @@ double theta(double stationX, double stationY,
 
     double alpha=atan(fraction);
     alpha=roundFirstDecimal(radToGra(alpha));
-
+ 
     if(alpha<0)
         alpha*=(-1);
     if(top>=0 && bot>0){

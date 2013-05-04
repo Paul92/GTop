@@ -8,6 +8,7 @@
 #include <stdlib.h>
 
 int drumuire(int argc, char **argv){
+    freopen ("testing/myfile.txt","r",stdin); //Radu's testing line
 
     char* inputFileName=argv[1];
     char* outputFileName=argv[2];
@@ -127,14 +128,14 @@ int drumuire(int argc, char **argv){
     computeThetas(points, points->next);
 
     double sumX=0, sumY=0;
-    computeRelatives(points, &sumX, &sumY); //WHO THE HELL IT THETA?
+    computeRelatives(points->next, &sumX, &sumY); //WHO THE HELL IT THETA?
                                             //maybe I should start from
                                             //points->next?
     
     double CTx = -sumX/distSum;
-    double CTy = -sumY/distSum;
+    double CTy = -sumY/distSum; 
 
-    correctRelatives(points, CTx, CTy);
+    correctRelatives(points->next, CTx, CTy);
 
     computeAbsolutes(points, stationX, stationY);
 
