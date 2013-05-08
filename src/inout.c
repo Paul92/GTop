@@ -10,36 +10,30 @@
  *  Functions:
  *      
  *      int getline(FILE *f, char line[LINE_MAX])
- *      Reads a line form the file f. A line ends at /n character or at the end
+ *      Reads a line form the file f and returns the number of characters. A line ends at /n character or at the end
  *  of the file.
- *
- *      char *readStation(FILE *f)
- *      Reads a station id from file f and returns a pointer to it.
- *
- *      int atoi(char a)
- *      Returns integer value of digit expressed by char a.
  *
  *      bool isblank(char a)
  *      Returns false if a<=32, true otherwise. All blank characters have 
  *  values smaller than 32, but they ar not the only. BE CAUTIOS!
  *
- *      long long readNumber(FILE *f)
- *      Reads from file f a floating point number as a long long. 
+ *      char *readStation(FILE *f)
+ *      Reads a station id from file f and returns a pointer to it.
+
+ *      double readNumber(FILE *f)
+ *      Reads from file f a floating point number as a double. 
  *      The last precision digits are decimals. 
  *      Acutally, his value is equal with Xe4, where X is the number read.
  *
- *      int readPoint(FILE *F, char point_id[100], 
- *                    long long &distance, long long &hz)
+ *      int readPoint(FILE *f, char point_id[100], 
+ *                    double *distance, double *hz, double *hv)
  *      Reads new point data from file f. 
  *      If the point is valid, returns 1, else returns EOS.
  *
- *      string itoa(long long nr)
- *      Converts nr to a string.
- *
  *      void printPoint(FILE *f, char point_id[100], 
- *                      long long absoluteX, long long absoluteY)
+ *                      double absoluteX, double absoluteY, double height)
  *      Prints in file f point_id, absoluteX, absoluteY in this order, separed 
- *  by a whitespace.
+ *  by a whitespace, and hight if it is positive.
 **/
 
 #include "./include/inout.h"
@@ -66,15 +60,15 @@ int getLine(FILE *f, char line[MAX_LINE]){
     return i;
 }
 
-int isBlank(char a){
+bool isBlank(char a){
 
     if(a==' ' || a=='\t')
-        return 1;
-    return 0;
+        return true;
+    return false;
 
 }
 
-char* readStation(FILE *f){
+char * readStation(FILE *f){
 
     static char station_id[100];
     char temp[100];
@@ -120,7 +114,7 @@ int readPoint(FILE *f, char point_id[100],
     //TO DO: error checking
 
         if(!strcmp(point_id, "9999") && *distance==0 && *hz==0)
-            return 0;
+            return EOS;
         else 
             return 1;
     }
