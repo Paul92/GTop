@@ -60,11 +60,11 @@ int getLine(FILE *f, char line[MAX_LINE]){
     return i;
 }
 
-bool isBlank(char a){
+int isBlank(char a){
 
     if(a==' ' || a=='\t')
-        return true;
-    return false;
+        return 1;
+    return 0;
 
 }
 
