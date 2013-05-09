@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 int drumuire(int argc, char **argv){
-    //freopen ("testing/myfile.txt","r",stdin); //Radu's testing line
+    freopen ("testing/myfile.txt","r",stdin); //Radu's testing line
 
     char* inputFileName=argv[1];
     char* outputFileName=argv[2];
@@ -57,7 +57,8 @@ int drumuire(int argc, char **argv){
     points = firstPoint;
 
     readPoint(inputFile, NULL, NULL, NULL, NULL);
-    fscanf(inputFile, "%s", line);
+    printf("END\n\n");
+  //  fscanf(inputFile, "%s", line);
 //actually make all argument optional. I don't like dummys. This is for the
 //first stop
 
@@ -77,12 +78,15 @@ int drumuire(int argc, char **argv){
 
     while(!feof(inputFile)){
         struct point *newPoint=(struct point*)malloc(sizeof(struct point));
+        char* dummy;
+        getLine(inputFile, dummy);
         strcpy(newPoint->point_id, readStation(inputFile));
         if(!feof(inputFile)){
 
             readPoint(inputFile, beforeCurrent_id, &newPoint->beforeDist, 
                       &newPoint->beforeHz, NULL);
 
+            printf("%s %d %d\n\n", beforeCurrent_id, newPoint->beforeDist, newPoint->beforeHz);
             readPoint(inputFile, afterCurrent_id, &newPoint->nextDist,
                       &newPoint->nextHz, NULL);
 
@@ -96,7 +100,6 @@ int drumuire(int argc, char **argv){
             readPoint(inputFile, NULL, NULL, NULL, NULL);    //check for stop
                                             //and for other damn errors
 
-            fscanf(inputFile, "%s", line);  //skip newline
             addPoint(points, newPoint);
             noOfPoints++;
         }
