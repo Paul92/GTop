@@ -9,31 +9,32 @@
  *
  *  Functions:
  *      
- *      int getline(FILE *f, char line[LINE_MAX])
- *      Reads a line form the file f and returns the number of characters. A line ends at /n character or at the end
+ *      int getLine(FILE *f, char line[LINE_MAX])
+ *      Reads a line form the file f and returns the number of characters. 
+ *  A line ends at /n character or at the end
  *  of the file.
  *
- *      bool isblank(char a)
- *      Returns false if a<=32, true otherwise. All blank characters have 
- *  values smaller than 32, but they ar not the only. BE CAUTIOS!
+ *	int isblank(char a)
+ *      Returns 1 if a<=32, 0 otherwise. All blank characters have 
+ *  values smaller than 32, but they are not the only. BE CAUTIOS!
  *
  *      char *readStation(FILE *f)
  *      Reads a station id from file f and returns a pointer to it.
-
+ *
  *      double readNumber(FILE *f)
  *      Reads from file f a floating point number as a double. 
- *      The last precision digits are decimals. 
- *      Acutally, his value is equal with Xe4, where X is the number read.
+ *  The last precision digits are decimals. 
+ *  Acutally, his value is equal with Xe4, where X is the number read.
  *
  *      int readPoint(FILE *f, char point_id[100], 
  *                    double *distance, double *hz, double *hv)
  *      Reads new point data from file f. 
- *      If the point is valid, returns 1, else returns EOS.
+ *  If the point is valid, returns 1, else returns EOS.
  *
  *      void printPoint(FILE *f, char point_id[100], 
  *                      double absoluteX, double absoluteY, double height)
  *      Prints in file f point_id, absoluteX, absoluteY in this order, separed 
- *  by a whitespace, and hight if it is positive.
+ *  by a whitespace, and height if it is positive.
 **/
 
 #include "./include/inout.h"
