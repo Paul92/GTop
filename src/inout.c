@@ -14,7 +14,7 @@
  *  A line ends at /n character or at the end
  *  of the file.
  *
- *	int isblank(char a)
+ *	int isBlank(char a)
  *      Returns 1 if a<=32, 0 otherwise. All blank characters have 
  *  values smaller than 32, but they are not the only. BE CAUTIOS!
  *
@@ -37,7 +37,7 @@
  *  by a whitespace, and height if it is positive.
 **/
 
-#include "./include/inout.h"
+#include "include/inout.h"
 #include "include/error.h"
 #include <stdio.h>
 #include <string.h>
