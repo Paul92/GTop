@@ -8,47 +8,50 @@
  *      precision - values are real values times 10^precision
  *
  *  Functions:
- *      long long roundFirstDecimal(long double x)
+ *      double roundFirstDecimal(double x)
  *      Rounds first decimal of x.
  *
- *      long long degToRad(long long x)
+ *      double degToRad(double x)
  *      Converts x from degrees to radians.
  *
- *      long long graToRad(long long x)
+ *      double graToRad(double x)
  *      Converts x from grades to radians.
  *
- *      long long radToDeg(long long x)
+ *      double radToDeg(double x)
  *      Converts x from radians to degrees.
  *
- *      long long radToGra(long long x)
+ *      double radToGra(double x)
  *      Converts x from radians to grades.
  *
- *      long long theta(long long stationX, long long stationY,
- *                      long long orientX,  long long orientY)
+ *      double theta(double stationX, double stationY,
+ *                      double orientX, double orientY)
  *      Computes theta angle between station located at coordinates 
  *  stationX, stationY and orientation point located at coordinates
  *  orientX, orientY.
  *
- *      long long orientation(long long theta, long long omega)
+ *	double omega(double orientHZ, double pointHZ)
+ *	Computes omega.
+ *
+ *      double orientation(double theta, double omega)
  *      Computes orientation of a point.
  *
- *      long long relativeX(long long dist, long long orientation)
+ *      double relativeX(double dist, double orientation)
  *      Computes relative position X of a point, based on distance and
  *  orientation.
  *
- *      long long relativeY(long long dist, long long orientation)
+ *      double relativeY(long long dist, long long orientation)
  *      Computes relative position y of a point, based on distance and
  *  orientation.
  *      
- *      long long absoluteX(long long relativeX, long long stationX)
+ *      double absoluteX(double relativeX, double stationX)
  *      Computes absolute position X of a point, based on his relative
  *  X position and the X position of station.
  *
- *      long long absoluteY(long long relativeY, long long stationY)
+ *      double absoluteY(double relativeY, double stationY)
  *      Computes absolute position Y of a point, based on his relative
  *  Y position and the Y position of station.
  *
- *      long long repairAngle(long long angle)
+ *      double repairAngle(double angle)
  *      If angle isn't between 0 and 400, this function brings it to this
  *  interval. CAUTION: It only adds or subtracts 400, so this works only for
  *  one full circle.
