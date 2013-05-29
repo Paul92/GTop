@@ -86,7 +86,7 @@ int drumuire(int argc, char **argv){
             readPoint(inputFile, beforeCurrent_id, &newPoint->beforeDist, 
                       &newPoint->beforeHz, NULL);
 
-            printf("%s %d %d\n\n", beforeCurrent_id, newPoint->beforeDist, newPoint->beforeHz);
+        //    printf("%s %d %d\n\n", beforeCurrent_id, newPoint->beforeDist, newPoint->beforeHz);
             readPoint(inputFile, afterCurrent_id, &newPoint->nextDist,
                       &newPoint->nextHz, NULL);
 
@@ -144,6 +144,9 @@ int drumuire(int argc, char **argv){
 
     printList(outputFile, points);
     echoList(points);
+
+    freeList(points);
+
     return 0;
 
 }

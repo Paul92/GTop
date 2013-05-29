@@ -114,3 +114,11 @@ void printList(FILE *outputFile, struct point *node){
         printList(outputFile, node->next);
     }
 }
+
+void freeList(struct point *node){
+    if(node->next!=NULL){
+        freeList(node->next);
+    }
+    free(node);
+}
+
