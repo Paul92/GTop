@@ -1,1 +1,1 @@
-int drumuire(int, char**);
+int drumuire(char*, char*);

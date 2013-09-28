@@ -5,10 +5,8 @@
 #include <string.h>
 #include <stdio.h>
 
-int radiere(int argc, char **argv){
-
-    char* inputFileName=argv[1];
-    char* outputFileName=argv[2];
+int radiere(char *inputFileName, char *outputFileName){
+    printf("Called radiere with %s %s\n", inputFileName, outputFileName);
 
     FILE *inputFile=fopen(inputFileName, "r");
     FILE *outputFile=fopen(outputFileName, "w");

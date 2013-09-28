@@ -1,2 +1,2 @@
-int radiere(int, char**);
+int radiere(char*, char* );
 

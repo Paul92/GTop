@@ -7,11 +7,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int drumuire(int argc, char **argv){
+int drumuire(char *inputFileName, char *outputFileName){
+    printf("Called drumuire with %s %s\n", inputFileName, outputFileName);
     freopen ("testing/myfile.txt","r",stdin); //Radu's testing line
-
-    char* inputFileName=argv[1];
-    char* outputFileName=argv[2];
 
     FILE *inputFile=fopen(inputFileName, "r");
     FILE *outputFile=fopen(outputFileName, "w");
@@ -78,7 +76,7 @@ int drumuire(int argc, char **argv){
 
     while(!feof(inputFile)){
         struct point *newPoint=(struct point*)malloc(sizeof(struct point));
-        char* dummy;
+        char* dummy = malloc(1024);
         getLine(inputFile, dummy);
         strcpy(newPoint->point_id, readStation(inputFile));
         if(!feof(inputFile)){
